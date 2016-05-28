@@ -14,14 +14,5 @@ public class CloudActivity extends Activity {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         super.onCreate(savedInstanceState);
         setContentView(new CloudView(this));
-        new Thread(){
-            @Override
-            public void run() {
-                super.run();
-                ClientLog.downloadimg();
-            }
-        }.start();
-        ClientLog.ClientLogs();
     }
-
 }

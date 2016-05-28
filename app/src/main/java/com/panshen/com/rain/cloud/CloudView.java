@@ -6,7 +6,12 @@ import android.animation.ValueAnimator;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
+import android.hardware.SensorManager;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.OvershootInterpolator;
 
@@ -18,13 +23,16 @@ import com.panshen.com.rain.R;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class CloudView extends BaseView {
+public class CloudView extends BaseView implements SensorEventListener {
     private Context mContext;
     //private ArrayList<Integer> mColors = new ArrayList();
     CloudBg cb;
     private ArrayList<Cloud> clouds = new ArrayList<>();
     Point currentPoint;
+    SensorManager sm;
+    Sensor sensor;
     private int[] colors = {Color.parseColor("#9ea8b1b4"), Color.parseColor("#9fffffff"), Color.parseColor("#9e3a4859")};
+    private boolean animend = false;
 
     public CloudView(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -33,12 +41,17 @@ public class CloudView extends BaseView {
     public CloudView(Context context) {
         super(context);
         mContext = context;
-        currentPoint = new Point(0,getHeight());
-//        mColors.add(context.getResources().getColor(R.color.colorTransGray));
-//        mColors.add(context.getResources().getColor(R.color.colorTransWhite));
-//        mColors.add(context.getResources().getColor(R.color.colorTransDeepBlue));
+        currentPoint = new Point(0, getHeight());
         StartDropAnim();
+        sm = (SensorManager) mContext.getSystemService(Context.SENSOR_SERVICE);
+        sensor = sm.getDefaultSensor(Sensor.TYPE_GRAVITY);
+        sm.registerListener(this, sensor, SensorManager.SENSOR_DELAY_GAME);
+    }
 
+    @Override
+    protected void onDetachedFromWindow() {
+        super.onDetachedFromWindow();
+        sm.unregisterListener(this);
     }
 
     public void StartDropAnim() {
@@ -47,8 +60,6 @@ public class CloudView extends BaseView {
         ValueAnimator DropAnim = ValueAnimator.ofObject(new PointEvaluator(), startPoint, endPoint);
         DropAnim.setDuration(1500);
         DropAnim.setInterpolator(new OvershootInterpolator());
-        //anim.setRepeatCount(ValueAnimator.INFINITE);
-        //anim.setRepeatMode(ValueAnimator.INFINITE);
         DropAnim.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
             public void onAnimationUpdate(ValueAnimator animation) {
@@ -66,6 +77,7 @@ public class CloudView extends BaseView {
                 for (Cloud mcl : clouds) {
                     //mcl.AnimEnd();
                 }
+                animend = true;
             }
         });
         DropAnim.start();
@@ -121,5 +133,24 @@ public class CloudView extends BaseView {
             Cloud cloud = new Cloud(getWidth(), getHeight(), mContext, colors[new Random().nextInt(colors.length)]);
             clouds.add(cloud);
         }
+    }
+
+    @Override
+    public void onSensorChanged(SensorEvent event) {
+        if (animend) {
+            Log.i("TAG [X] ", event.values[0] + "\n");
+            Log.i("TAG [Y] ", event.values[1] + "\n");
+            Log.i("TAG [Z] ", event.values[2] + "\n");
+
+            for (Cloud mcl : clouds) {
+                mcl.ControlY(event.values[1]);
+                mcl.ControlX(event.values[0]);
+            }
+        }
+    }
+
+    @Override
+    public void onAccuracyChanged(Sensor sensor, int accuracy) {
+
     }
 }

@@ -14,27 +14,27 @@ import java.util.Random;
 
 public class Cloud {
     private Paint mPaint;
-    private int radius, x, y;
+    private float radius, x, y;
     private Context mContext;
     private int mWidth, mHeight;
     private String BKC = "#4a9122";
     private int mColor;
-    private int[] sizes = {50,100,80,200};
+    private int[] sizes = {50, 100, 80, 200};
     boolean isStartAnimCompl = false;
     private Point p;
+
     public Cloud(int width, int height, Context context, int color) {
         mWidth = width;
         mHeight = height;
         this.mContext = context;
         mColor = color;
         //mColor = Color.parseColor("#4a9122");
-        radius = width/4+new Random().nextInt(200);
+        radius = width / 4 + new Random().nextInt(200);
         init();
     }
 
 
-
-    public void AnimEnd(){
+    public void AnimEnd() {
         isStartAnimCompl = true;
     }
 
@@ -46,38 +46,47 @@ public class Cloud {
     }
 
     public void move() {
-        if(isStartAnimCompl){
+        if (isStartAnimCompl) {
 
         }
 //        if (radius < mWidth / 3 + sizes[new Random().nextInt(sizes.length)]) {
 //            radius += 1;
 //        }
+
     }
 
-    public void ControlX(int i) {
-        this.x = i;
+    public void ControlX(float i) {
+        this.x += i*20;
     }
 
+    public void reduceX() {
+        this.x -= 1;
+    }
+
+    public void plusX() {
+        this.x += 1;
+    }
+    public void reduceY() {
+        this.y -= 30;
+    }
+
+    public void plusY() {
+        this.y += 30;
+    }
+
+    public void ControlY(float i) {
+        this.y = i*25;
+    }
     public void ControlY(int i) {
         this.y = i;
     }
 
+    public void ControlSize(float i) {
+        this.radius = i + new Random().nextInt(200);
+    }
 
     public void draw(Canvas canvas) {
         canvas.drawCircle(x, y, radius, mPaint);
     }
 
-    private void drawCoordinateSystemm(Canvas canvas) {
-        canvas.save();
-
-        Paint fuzhuPaint = new Paint();
-        fuzhuPaint.setColor(Color.parseColor("#e2000000"));
-        fuzhuPaint.setStrokeWidth(5);
-        fuzhuPaint.setAlpha(100);
-        fuzhuPaint.setStyle(Paint.Style.FILL);
-
-        canvas.drawRect(0, 0, mWidth, mHeight, fuzhuPaint);
-
-        canvas.restore();
-    }
 }
