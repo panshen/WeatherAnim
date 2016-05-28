@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="colorCloudBackground">#92a5ac</color>
+    <color name="colorTransBGC">#93aaab</color>
+
+    <color name="colorTransGray">#9ea8b1b4</color>
+    <color name="colorTransWhite">#9fffffff</color>
+    <color name="colorTransDeepBlue">#9e3a4859</color>
+</resources>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="RainView">
+        <!-- 雨点数量 -->
+        <attr name="rainNum" format="integer"/>
+        <!-- 雨点大小 -->
+        <attr name="size" format="integer"/>
+        <!-- 雨点颜色 -->
+        <attr name="rainColor" format="integer"/>
+        <!-- 雨点颜色随机 -->
+        <attr name="randColor" format="boolean"/>
+    </declare-styleable>
+</resources>
