@@ -31,22 +31,11 @@ public class CloudBg {
     public void init() {
         mPaint = new Paint();
         mPaint.setColor(mColor);
-        //radius = mWidth / 3;
-//        x = new Random().nextInt(mWidth);
-//        y = new Random().nextInt(30);
-
-    }
-
-
-    public void move() {
-//        if (radius < mWidth / 3 + 50) {
-//            radius += 1;
-//        }
     }
 
     public void draw(Canvas canvas) {
-        canvas.drawRect(0, 0, mWidth, mHeight, mPaint);
 
+        canvas.drawRect(0, 0, mWidth, mHeight, mPaint);
     }
 
 }

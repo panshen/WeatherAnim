@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
 import android.util.AttributeSet;
 
 import com.panshen.com.rain.BaseView;
@@ -56,5 +58,15 @@ public class RainView extends BaseView {
 					rainColor, randColor);
 			list.add(item);
 		}
+	}
+
+	@Override
+	public void onSensorChanged(SensorEvent event) {
+
+	}
+
+	@Override
+	public void onAccuracyChanged(Sensor sensor, int accuracy) {
+
 	}
 }

@@ -2,20 +2,26 @@ package com.panshen.com.rain;
 
 import android.content.Context;
 import android.graphics.Canvas;
+import android.hardware.Sensor;
+import android.hardware.SensorEventListener;
+import android.hardware.SensorManager;
 import android.util.AttributeSet;
 import android.view.View;
 
-public abstract class BaseView extends View {
+public abstract class BaseView extends View implements SensorEventListener {
 
     private MyThread thread;
     private boolean running = true;
-
+    SensorManager sm;
+    Sensor sensor;
+    private Context context;
     public BaseView(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
 
     public BaseView(Context context) {
         super(context);
+        this.context = context;
     }
 
     protected abstract void drawSub(Canvas canvas);
@@ -51,10 +57,20 @@ public abstract class BaseView extends View {
         }
     }
 
+
+    @Override
+    protected void onAttachedToWindow() {
+        super.onAttachedToWindow();
+        sm = (SensorManager) context.getSystemService(Context.SENSOR_SERVICE);
+        sensor = sm.getDefaultSensor(Sensor.TYPE_GRAVITY);
+        sm.registerListener(this, sensor, SensorManager.SENSOR_DELAY_GAME);
+    }
+
     @Override
     protected void onDetachedFromWindow() {
         super.onDetachedFromWindow();
         running = false;
+        sm.unregisterListener(this);
     }
 
 }

@@ -21,18 +21,18 @@ import com.panshen.com.rain.PointEvaluator;
 import com.panshen.com.rain.R;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
-public class CloudView extends BaseView implements SensorEventListener {
+public class CloudView extends BaseView {
     private Context mContext;
     //private ArrayList<Integer> mColors = new ArrayList();
     CloudBg cb;
     private ArrayList<Cloud> clouds = new ArrayList<>();
     Point currentPoint;
-    SensorManager sm;
-    Sensor sensor;
     private int[] colors = {Color.parseColor("#9ea8b1b4"), Color.parseColor("#9fffffff"), Color.parseColor("#9e3a4859")};
     private boolean animend = false;
+    private ArrayList<Integer> size = null;
 
     public CloudView(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -42,16 +42,12 @@ public class CloudView extends BaseView implements SensorEventListener {
         super(context);
         mContext = context;
         currentPoint = new Point(0, getHeight());
-        StartDropAnim();
-        sm = (SensorManager) mContext.getSystemService(Context.SENSOR_SERVICE);
-        sensor = sm.getDefaultSensor(Sensor.TYPE_GRAVITY);
-        sm.registerListener(this, sensor, SensorManager.SENSOR_DELAY_GAME);
+        //StartDropAnim();
     }
 
     @Override
     protected void onDetachedFromWindow() {
         super.onDetachedFromWindow();
-        sm.unregisterListener(this);
     }
 
     public void StartDropAnim() {
@@ -128,24 +124,21 @@ public class CloudView extends BaseView implements SensorEventListener {
     @Override
     protected void init() {
         cb = new CloudBg(getWidth(), getHeight(), mContext, getResources().getColor(R.color.colorCloudBackground));
-
+        size = new ArrayList<Integer>();
         for (int i = 0; i < 5; i++) {
-            Cloud cloud = new Cloud(getWidth(), getHeight(), mContext, colors[new Random().nextInt(colors.length)]);
+            size.add(new Random().nextInt(getWidth()/20));
+        }
+        for (int i = 0; i < 5; i++) {
+            Cloud cloud = new Cloud(size.get(i), getWidth(), getHeight(), mContext, colors[new Random().nextInt(colors.length)]);
             clouds.add(cloud);
         }
     }
 
     @Override
     public void onSensorChanged(SensorEvent event) {
-        if (animend) {
-            Log.i("TAG [X] ", event.values[0] + "\n");
-            Log.i("TAG [Y] ", event.values[1] + "\n");
-            Log.i("TAG [Z] ", event.values[2] + "\n");
-
-            for (Cloud mcl : clouds) {
-                mcl.ControlY(event.values[1]);
-                mcl.ControlX(event.values[0]);
-            }
+        for (Cloud mcl : clouds) {
+            mcl.ControlY(event.values[1]);
+            mcl.ControlX(event.values[0]);
         }
     }
 
