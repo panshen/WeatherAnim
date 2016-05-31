@@ -1,18 +1,10 @@
-package com.panshen.com.rain.cloud;
+package com.panshen.com.rain.sun;
 
-import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Paint;
-import android.util.Log;
-import android.view.animation.AccelerateDecelerateInterpolator;
-import android.view.animation.Animation;
-import android.view.animation.Transformation;
 
-import java.util.Random;
-
-public class CloudBg {
+public class SunBg {
     private Paint mPaint;
     private int radius, x, y;
     private Context mContext;
@@ -20,7 +12,7 @@ public class CloudBg {
     private String BKC = "#4a9122";
     private int mColor;
 
-    public CloudBg(int width, int height, Context context, int color) {
+    public SunBg(int width, int height, Context context, int color) {
         mWidth = width;
         mHeight = height;
         this.mContext = context;

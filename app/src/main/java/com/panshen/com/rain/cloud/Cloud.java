@@ -1,16 +1,8 @@
 package com.panshen.com.rain.cloud;
 
-import android.animation.ValueAnimator;
 import android.content.Context;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Paint;
-import android.util.Log;
-import android.view.animation.AccelerateDecelerateInterpolator;
-import android.widget.Toast;
-
-import com.panshen.com.rain.Point;
-import com.panshen.com.rain.PointEvaluator;
 
 import java.util.Random;
 
@@ -46,16 +38,8 @@ public class Cloud {
     }
 
     public void ControlX(float i) {
-//        if (x < mWidth) {
-//            x += i * 10;
-//        }
-//
-//        if(x>0){
-//            x += i * 10;
-//        }
         x = ((xx + i) * 30);
     }
-
 
     public void ControlY(float i) {
         y = i * 20;
@@ -63,6 +47,10 @@ public class Cloud {
 
     public void ControlY(int i) {
         y = i;
+    }
+
+    public void ControlX(int i) {
+        x = i;
     }
 
     public void draw(Canvas canvas) {

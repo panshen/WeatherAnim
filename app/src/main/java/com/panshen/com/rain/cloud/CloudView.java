@@ -8,30 +8,24 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
-import android.hardware.SensorEventListener;
-import android.hardware.SensorManager;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.OvershootInterpolator;
 
 import com.panshen.com.rain.BaseView;
-import com.panshen.com.rain.Point;
+import com.panshen.com.rain.mPoint;
 import com.panshen.com.rain.PointEvaluator;
 import com.panshen.com.rain.R;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
 
 public class CloudView extends BaseView {
     private Context mContext;
-    //private ArrayList<Integer> mColors = new ArrayList();
     CloudBg cb;
     private ArrayList<Cloud> clouds = new ArrayList<>();
-    Point currentPoint;
+    mPoint currentMPoint;
     private int[] colors = {Color.parseColor("#9ea8b1b4"), Color.parseColor("#9fffffff"), Color.parseColor("#9e3a4859")};
-    private boolean animend = false;
     private ArrayList<Integer> size = null;
 
     public CloudView(Context context, AttributeSet attrs) {
@@ -41,8 +35,9 @@ public class CloudView extends BaseView {
     public CloudView(Context context) {
         super(context);
         mContext = context;
-        currentPoint = new Point(0, getHeight());
+        currentMPoint = new mPoint(0, getHeight());
         //StartDropAnim();
+        //StartReverseAnimY();
     }
 
     @Override
@@ -51,17 +46,17 @@ public class CloudView extends BaseView {
     }
 
     public void StartDropAnim() {
-        Point startPoint = new Point(0, -1000);
-        Point endPoint = new Point(0, 0);
-        ValueAnimator DropAnim = ValueAnimator.ofObject(new PointEvaluator(), startPoint, endPoint);
+        mPoint startMPoint = new mPoint(0, -1000);
+        mPoint endMPoint = new mPoint(0, 0);
+        ValueAnimator DropAnim = ValueAnimator.ofObject(new PointEvaluator(), startMPoint, endMPoint);
         DropAnim.setDuration(1500);
         DropAnim.setInterpolator(new OvershootInterpolator());
         DropAnim.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
             public void onAnimationUpdate(ValueAnimator animation) {
-                currentPoint = (Point) animation.getAnimatedValue();
+                currentMPoint = (mPoint) animation.getAnimatedValue();
                 for (Cloud mcl : clouds) {
-                    mcl.ControlY((int) currentPoint.getY());
+                    mcl.ControlY((int) currentMPoint.getY());
                 }
             }
         });
@@ -69,31 +64,29 @@ public class CloudView extends BaseView {
             @Override
             public void onAnimationEnd(Animator animation) {
                 super.onAnimationEnd(animation);
-                // StartReverseAnim();
+                // StartReverseAnimY();
                 for (Cloud mcl : clouds) {
                     //mcl.AnimEnd();
                 }
-                animend = true;
             }
         });
         DropAnim.start();
     }
 
-
-    public void StartReverseAnim() {
-        Point startPoint = new Point(0, 0);
-        Point endPoint = new Point(0, -100);
-        ValueAnimator ReverseAnim = ValueAnimator.ofObject(new PointEvaluator(), startPoint, endPoint);
-        ReverseAnim.setDuration(1000);
+    public void StartReverseAnimY() {
+        mPoint startMPoint = new mPoint(0, 0);
+        mPoint endMPoint = new mPoint(0, -100);
+        ValueAnimator ReverseAnim = ValueAnimator.ofObject(new PointEvaluator(), startMPoint, endMPoint);
+        ReverseAnim.setDuration(2000);
         ReverseAnim.setInterpolator(new AccelerateDecelerateInterpolator());
         ReverseAnim.setRepeatCount(ValueAnimator.INFINITE);
         ReverseAnim.setRepeatMode(ValueAnimator.REVERSE);
         ReverseAnim.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
             public void onAnimationUpdate(ValueAnimator animation) {
-                currentPoint = (Point) animation.getAnimatedValue();
+                currentMPoint = (mPoint) animation.getAnimatedValue();
                 for (Cloud mcl : clouds) {
-                    mcl.ControlY((int) currentPoint.getY());
+                    mcl.ControlY((int) currentMPoint.getY());
                 }
             }
         });
@@ -114,7 +107,6 @@ public class CloudView extends BaseView {
     @Override
     protected void logic() {
         if (clouds.size() != 0 && cb != null) {
-            cb.move();
             for (Cloud mcl : clouds) {
                 mcl.move();
             }
@@ -126,7 +118,7 @@ public class CloudView extends BaseView {
         cb = new CloudBg(getWidth(), getHeight(), mContext, getResources().getColor(R.color.colorCloudBackground));
         size = new ArrayList<Integer>();
         for (int i = 0; i < 5; i++) {
-            size.add(new Random().nextInt(getWidth()/20));
+            size.add(new Random().nextInt(getWidth() / 20));
         }
         for (int i = 0; i < 5; i++) {
             Cloud cloud = new Cloud(size.get(i), getWidth(), getHeight(), mContext, colors[new Random().nextInt(colors.length)]);

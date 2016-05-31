@@ -6,11 +6,11 @@ public class PointEvaluator implements TypeEvaluator {
 
     @Override
     public Object evaluate(float fraction, Object startValue, Object endValue) {
-        Point startPoint = (Point) startValue;
-        Point endPoint = (Point) endValue;
-        float x = startPoint.getX() + fraction * (endPoint.getX() - startPoint.getX());
-        float y = startPoint.getY() + fraction * (endPoint.getY() - startPoint.getY());
-        Point point = new Point(x, y);
-        return point;
+        mPoint startMPoint = (mPoint) startValue;
+        mPoint endMPoint = (mPoint) endValue;
+        float x = startMPoint.getX() + fraction * (endMPoint.getX() - startMPoint.getX());
+        float y = startMPoint.getY() + fraction * (endMPoint.getY() - startMPoint.getY());
+        mPoint mPoint = new mPoint(x, y);
+        return mPoint;
     }
 }
