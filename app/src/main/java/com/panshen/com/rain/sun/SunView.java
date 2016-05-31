@@ -33,27 +33,27 @@ public class SunView extends BaseView {
 
     @Override
     protected void drawSub(Canvas canvas) {
-       // if (mSuns.size() != 0 && sunbg != null) {
-            sunbg.draw(canvas);
+        //if (mSuns.size() != 0 && sunbg != null) {
+            //sunbg.draw(canvas);
             for (Sun s : mSuns) {
                 s.draw(canvas);
-            }
-        //}
+           // }
+        }
     }
 
     @Override
     protected void logic() {
-       // if (mSuns.size() != 0 && sunbg != null) {
+        if (mSuns.size() != 0 && sunbg != null) {
             for (Sun s : mSuns) {
-                s.move();
+                //s.move();
             }
-        //}
+        }
     }
 
     @Override
     protected void init() {
         sunbg = new SunBg(getWidth(), getHeight(), mContext, getResources().getColor(R.color.colorCloudBackground));
-        for (int i = 1; i < 2; i++) {
+        for (int i = 0; i < 1; i++) {
             Sun sun = new Sun( getWidth(), getHeight(), mContext, colors[new Random().nextInt(colors.length)]);
             mSuns.add(sun);
         }

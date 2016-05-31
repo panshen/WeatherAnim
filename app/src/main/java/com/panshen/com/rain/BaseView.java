@@ -37,7 +37,9 @@ public abstract class BaseView extends View implements SensorEventListener {
             while (running) {
 
                 logic();
-                postInvalidate();
+
+                postInvalidate();//draw
+
                 try {
                     Thread.sleep(10);
                 } catch (InterruptedException e) {

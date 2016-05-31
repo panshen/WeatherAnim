@@ -21,8 +21,7 @@ public class Sun {
     private int mColor;
     private int Rheight = 200;
     private int xx = 1;
-    Paint fuzhuPaint;
-    Path path = new Path();
+
     private int cX, cY;
     private int[] xxz = new int[9];
     private int[] yxz = new int[9];
@@ -44,7 +43,7 @@ public class Sun {
         mPaint.setColor(mColor);
         mPaint.setAntiAlias(true);
         mPaint.setColor(Color.BLACK);
-        mPaint.setStyle(Paint.Style.STROKE);
+        mPaint.setStyle(Paint.Style.FILL);
 
         MyPolygon mp = new MyPolygon(xxz, yxz);
         mp.posOfPoint(9);
@@ -56,13 +55,16 @@ public class Sun {
     }
 
     public void draw(Canvas canvas) {
+        Path path = new Path();
         canvas.translate(cX, cY);
-        canvas.drawRect(0, 0, 10, 10, mPaint);
+
+        canvas.rotate(xx);
+        xx++;
+        if (xx == 360) xx = 0;
 
         for (int i = 0; i < points.size(); i++) {
             if (i == 0)
                 path.moveTo(points.get(0).getX(), points.get(0).getY());
-
             path.lineTo(points.get(i).getX(), points.get(i).getY());
         }
         path.lineTo(points.get(0).getX(), points.get(0).getY());
