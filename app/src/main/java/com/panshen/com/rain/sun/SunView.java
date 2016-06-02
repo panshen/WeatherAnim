@@ -9,14 +9,10 @@ import android.util.AttributeSet;
 
 import com.panshen.com.rain.BaseView;
 import com.panshen.com.rain.R;
-import com.panshen.com.rain.cloud.Cloud;
 
 import java.util.ArrayList;
 import java.util.Random;
 
-/**
- * Created by Z on 2016/5/29.
- */
 public class SunView extends BaseView {
     private int[] colors = {Color.parseColor("#9ea8b1b4"), Color.parseColor("#9fffffff"), Color.parseColor("#9e3a4859")};
     private SunBg sunbg;
@@ -33,11 +29,11 @@ public class SunView extends BaseView {
 
     @Override
     protected void drawSub(Canvas canvas) {
-        //if (mSuns.size() != 0 && sunbg != null) {
-            //sunbg.draw(canvas);
+        if (mSuns.size() != 0 && sunbg != null) {
+            sunbg.draw(canvas);
             for (Sun s : mSuns) {
                 s.draw(canvas);
-           // }
+            }
         }
     }
 
