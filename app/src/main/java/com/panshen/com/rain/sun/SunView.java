@@ -22,6 +22,7 @@ public class SunView extends BaseView {
     public SunView(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
+
     public SunView(Context context) {
         super(context);
         this.mContext = context;
@@ -29,28 +30,24 @@ public class SunView extends BaseView {
 
     @Override
     protected void drawSub(Canvas canvas) {
-        if (mSuns.size() != 0 && sunbg != null) {
-            sunbg.draw(canvas);
-            for (Sun s : mSuns) {
-                s.draw(canvas);
-            }
+        sunbg.draw(canvas);
+        for (int i = 0; i < mSuns.size(); i++) {
+            mSuns.get(i).draw(canvas);
         }
     }
 
     @Override
     protected void logic() {
-        if (mSuns.size() != 0 && sunbg != null) {
-            for (Sun s : mSuns) {
-                //s.move();
-            }
+        for (Sun s : mSuns) {
+            //s.move();
         }
     }
 
     @Override
     protected void init() {
         sunbg = new SunBg(getWidth(), getHeight(), mContext, getResources().getColor(R.color.colorCloudBackground));
-        for (int i = 0; i < 1; i++) {
-            Sun sun = new Sun( getWidth(), getHeight(), mContext, colors[new Random().nextInt(colors.length)]);
+        for (int i = 2; i < 6; i++) {
+            Sun sun = new Sun(getWidth(), getHeight(), mContext, colors[new Random().nextInt(colors.length)],i*100);
             mSuns.add(sun);
         }
     }

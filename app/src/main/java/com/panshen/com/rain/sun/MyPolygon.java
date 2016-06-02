@@ -12,12 +12,12 @@ class MyPolygon {
     private int r;
     private ArrayList<mPoint> points = new ArrayList<>();
 
-    public MyPolygon(int[] x, int[] y) {
+    public MyPolygon(int[] x, int[] y,int r) {
         this.x = x;
         this.y = y;
         startX = 0;
-        startY = -600;
-        r = 600;
+        startY = -r;
+        this.r = r;
     }
 
     public void posOfPoint(int bianshu) {

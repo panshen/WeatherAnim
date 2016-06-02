@@ -21,18 +21,19 @@ public class Sun {
     private int xx = 1;
 
     private int cX, cY;
-    private int[] xxz = new int[9];
-    private int[] yxz = new int[9];
     private ArrayList<mPoint> points = new ArrayList<>();
+    private int PolygonWidth;
 
-    public Sun(int width, int height, Context context, int color) {
+    public Sun(int width, int height, Context context, int color, int PolygonWidth) {
         mWidth = width;
         mHeight = height;
         this.mContext = context;
         mColor = color;
-        init();
+
         cX = mWidth / 2;
         cY = mHeight / 2;
+        this.PolygonWidth = PolygonWidth;
+        init();
     }
 
     public void init() {
@@ -40,10 +41,9 @@ public class Sun {
         mPaint.setStrokeWidth(3);
         mPaint.setColor(mColor);
         mPaint.setAntiAlias(true);
-        mPaint.setColor(Color.BLACK);
         mPaint.setStyle(Paint.Style.FILL);
 
-        MyPolygon mp = new MyPolygon(xxz, yxz);
+        MyPolygon mp = new MyPolygon(new int[9], new int[9], PolygonWidth);
         mp.posOfPoint(9);
         points.addAll(mp.getPoints());
     }
@@ -54,11 +54,12 @@ public class Sun {
 
     public void draw(Canvas canvas) {
         Path path = new Path();
-        canvas.translate(cX, cY);
+        canvas.save();
+        canvas.translate(cX, 0);
 
         canvas.rotate(xx);
-        xx++;
-        if (xx == 360) xx = 0;
+        xx += PolygonWidth / 200;
+        if (xx >= 360) xx = 0;
 
         for (int i = 0; i < points.size(); i++) {
             if (i == 0)
@@ -68,5 +69,6 @@ public class Sun {
         path.lineTo(points.get(0).getX(), points.get(0).getY());
         path.close();
         canvas.drawPath(path, mPaint);
+        canvas.restore();
     }
 }
