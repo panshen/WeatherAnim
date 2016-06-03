@@ -5,34 +5,33 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
+import android.util.Log;
 
 import com.panshen.com.rain.mPoint;
 
 import java.util.ArrayList;
 
+//pathmeasure
 public class Sun {
     private Paint mPaint;
-    private int radius, x, y;
-    private Context mContext;
     private int mWidth, mHeight;
-    private String BKC = "#4a9122";
     private int mColor;
-    private int Rheight = 200;
-    private int xx = 1;
+    private float xx = 1.0f;
 
-    private int cX, cY;
+    private float cX, cY = -100f;
     private ArrayList<mPoint> points = new ArrayList<>();
     private int PolygonWidth;
+    Path path;
 
-    public Sun(int width, int height, Context context, int color, int PolygonWidth) {
+    public Sun(int width, int height, Context context, int color, int PW) {
         mWidth = width;
         mHeight = height;
-        this.mContext = context;
         mColor = color;
 
         cX = mWidth / 2;
-        cY = mHeight / 2;
-        this.PolygonWidth = PolygonWidth;
+        cY = 200;
+        PolygonWidth = PW;
+        path = new Path();
         init();
     }
 
@@ -46,20 +45,6 @@ public class Sun {
         MyPolygon mp = new MyPolygon(new int[9], new int[9], PolygonWidth);
         mp.posOfPoint(9);
         points.addAll(mp.getPoints());
-    }
-
-    public void move() {
-
-    }
-
-    public void draw(Canvas canvas) {
-        Path path = new Path();
-        canvas.save();
-        canvas.translate(cX, 0);
-
-        canvas.rotate(xx);
-        xx += PolygonWidth / 200;
-        if (xx >= 360) xx = 0;
 
         for (int i = 0; i < points.size(); i++) {
             if (i == 0)
@@ -67,7 +52,31 @@ public class Sun {
             path.lineTo(points.get(i).getX(), points.get(i).getY());
         }
         path.lineTo(points.get(0).getX(), points.get(0).getY());
-        path.close();
+        // path.reset();
+    }
+
+    public void move() {
+
+    }
+
+    public void ControlY(float i) {
+        cY = i * 30;
+    }
+
+    public void ControlX(float i) {
+        cX = i * 20;
+    }
+
+    public void draw(Canvas canvas) {
+
+        canvas.save();
+        canvas.translate(cX, cY);
+        canvas.rotate(xx);
+
+        //xx += PolygonWidth / 200;
+        xx += (float)PolygonWidth/1000;
+        if (xx >= 360.0f) xx = 0.0f;
+
         canvas.drawPath(path, mPaint);
         canvas.restore();
     }
