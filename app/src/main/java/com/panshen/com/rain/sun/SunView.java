@@ -12,9 +12,10 @@ import com.panshen.com.rain.R;
 
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.concurrent.ExecutionException;
 
 public class SunView extends BaseView {
-    private int[] colors = {Color.parseColor("#9ea8b1b4"), Color.parseColor("#9fffffff"), Color.parseColor("#9e3a4859")};
+    private int[] colors = {getResources().getColor(R.color.colorSun), getResources().getColor(R.color.colorSunn), getResources().getColor(R.color.colorSunnn), getResources().getColor(R.color.colorSunnnn), getResources().getColor(R.color.colorSunnnnn), getResources().getColor(R.color.colorSunnnnnn), getResources().getColor(R.color.colorSunnnnnnn), getResources().getColor(R.color.colorSunnnnnnnn)};
     private SunBg sunbg;
     private Context mContext;
     private ArrayList<Sun> mSuns = new ArrayList<Sun>();
@@ -46,9 +47,13 @@ public class SunView extends BaseView {
     @Override
     protected void init() {
         sunbg = new SunBg(getWidth(), getHeight(), mContext, getResources().getColor(R.color.colorCloudBackground));
-        for (int i = 2; i < 6; i++) {
-            Sun sun = new Sun(getWidth(), getHeight(), mContext, colors[new Random().nextInt(colors.length)],i*100);
-            mSuns.add(sun);
+        for (int i = 8; i >=0; i--) {
+            try {
+                Sun sun = new Sun(getWidth(), getHeight(), mContext, colors[i], i * 100);
+                mSuns.add(sun);
+            } catch (Exception e) {
+
+            }
         }
     }
 
