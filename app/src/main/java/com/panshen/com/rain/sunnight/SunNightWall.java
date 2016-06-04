@@ -1,17 +1,14 @@
-package com.panshen.com.rain.sun;
+package com.panshen.com.rain.sunnight;
 
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 
-import com.panshen.com.rain.Beam;
-
-
-public class SunBg implements Beam {
+public class SunNightWall {
     private Paint mPaint;
     private int mWidth, mHeight;
     private int mColor;
-    public SunBg(int width, int height, Context context, int color) {
+    public SunNightWall(int width, int height, Context context, int color) {
         mWidth = width;
         mHeight = height;
         mColor = color;
@@ -23,22 +20,7 @@ public class SunBg implements Beam {
         mPaint.setColor(mColor);
     }
 
-    @Override
-    public void move() {
-
-    }
-
     public void draw(Canvas canvas) {
         canvas.drawRect(0, 0, mWidth, mHeight, mPaint);
-    }
-
-    @Override
-    public void ControlX(float i) {
-
-    }
-
-    @Override
-    public void ControlY(float i) {
-
     }
 }

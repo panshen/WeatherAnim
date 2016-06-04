@@ -1,10 +1,10 @@
-package com.panshen.com.rain.sun;
+package com.panshen.com.rain;
 
 import com.panshen.com.rain.mPoint;
 
 import java.util.ArrayList;
 
-class Polygon {
+public class Polygon {
     private int[] x;
     private int[] y;
     private int startX;

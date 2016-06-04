@@ -6,12 +6,13 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
 
+import com.panshen.com.rain.Beam;
+import com.panshen.com.rain.Polygon;
 import com.panshen.com.rain.mPoint;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
-public class Halo {
+public class Halo implements Beam {
     private Paint mPaint;
     private int mWidth, mHeight;
     private int mColor;

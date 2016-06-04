@@ -5,12 +5,14 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Path;
 
+import com.panshen.com.rain.Beam;
+import com.panshen.com.rain.Polygon;
 import com.panshen.com.rain.mPoint;
 
 import java.util.ArrayList;
 
 //pathmeasure
-public class SunBeam {
+public class SunBeam implements Beam {
     private Paint mPaint;
     private int mWidth, mHeight;
     private int mColor;
@@ -50,12 +52,12 @@ public class SunBeam {
             path.lineTo(points.get(i).getX(), points.get(i).getY());
         }
         path.lineTo(points.get(0).getX(), points.get(0).getY());
-        // path.reset();
     }
 
     public void move() {
 
     }
+
 
     public void ControlY(float i) {
         cY = i * 30;

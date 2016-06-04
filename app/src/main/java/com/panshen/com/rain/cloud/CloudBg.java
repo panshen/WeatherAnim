@@ -10,9 +10,11 @@ import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.Animation;
 import android.view.animation.Transformation;
 
+import com.panshen.com.rain.Beam;
+
 import java.util.Random;
 
-public class CloudBg {
+public class CloudBg implements Beam{
     private Paint mPaint;
     private int radius, x, y;
     private Context mContext;
@@ -33,7 +35,22 @@ public class CloudBg {
         mPaint.setColor(mColor);
     }
 
+    @Override
+    public void move() {
+
+    }
+
     public void draw(Canvas canvas) {
         canvas.drawRect(0, 0, mWidth, mHeight, mPaint);
+    }
+
+    @Override
+    public void ControlX(float i) {
+
+    }
+
+    @Override
+    public void ControlY(float i) {
+
     }
 }

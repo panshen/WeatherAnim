@@ -9,6 +9,7 @@
     <color name="colorTransGray">#9ea8b1b4</color>
     <color name="colorTransWhite">#9fffffff</color>
     <color name="colorTransDeepBlue">#9e3a4859</color>
+
     <color name="colorSun">#d04727</color>
     <color name="colorSunn">#d46432</color>
     <color name="colorSunnn">#d67639</color>
@@ -17,4 +18,10 @@
     <color name="colorSunnnnnn">#d3b756</color>
     <color name="colorSunnnnnnn">#c1c676</color>
     <color name="colorSunnnnnnnn">#9dc8aa</color>
+
+    <color name="colorSunNightWall">#09213d</color>
+    <color name="colorSunNight1">#a5c9d7</color>
+    <color name="colorSunNight2">#75b8c0</color>
+    <color name="colorSunNight3">#feffff</color>
+
 </resources>
