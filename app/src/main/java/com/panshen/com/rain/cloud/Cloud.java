@@ -38,7 +38,7 @@ public class Cloud {
     }
 
     public void ControlX(float i) {
-        x = i*20;
+       x = ((xx + i) * 30);
     }
 
     public void ControlY(float i) {

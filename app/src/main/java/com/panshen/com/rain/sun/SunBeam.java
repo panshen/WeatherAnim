@@ -2,32 +2,30 @@ package com.panshen.com.rain.sun;
 
 import android.content.Context;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
-import android.util.Log;
 
 import com.panshen.com.rain.mPoint;
 
 import java.util.ArrayList;
 
 //pathmeasure
-public class Sun {
+public class SunBeam {
     private Paint mPaint;
     private int mWidth, mHeight;
     private int mColor;
     private float xx = 1.0f;
-
+    private int xxx;
     private float cX, cY = -100f;
     private ArrayList<mPoint> points = new ArrayList<>();
     private int PolygonWidth;
     Path path;
 
-    public Sun(int width, int height, Context context, int color, int PW) {
+    public SunBeam(int xxx,int width, int height, Context context, int color, int PW) {
         mWidth = width;
         mHeight = height;
         mColor = color;
-
+       this. xxx = xxx;
         cX = mWidth / 2;
         cY = 200;
         PolygonWidth = PW;
@@ -42,7 +40,7 @@ public class Sun {
         mPaint.setAntiAlias(true);
         mPaint.setStyle(Paint.Style.FILL);
 
-        MyPolygon mp = new MyPolygon(new int[9], new int[9], PolygonWidth);
+        Polygon mp = new Polygon(new int[9], new int[9], PolygonWidth);
         mp.posOfPoint(9);
         points.addAll(mp.getPoints());
 
@@ -64,7 +62,7 @@ public class Sun {
     }
 
     public void ControlX(float i) {
-        cX = i * 20;
+        cX = (xxx + i)*30;
     }
 
     public void draw(Canvas canvas) {
@@ -73,8 +71,7 @@ public class Sun {
         canvas.translate(cX, cY);
         canvas.rotate(xx);
 
-        //xx += PolygonWidth / 200;
-        xx += (float)PolygonWidth/1000;
+        xx += (float) PolygonWidth / 1000;
         if (xx >= 360.0f) xx = 0.0f;
 
         canvas.drawPath(path, mPaint);

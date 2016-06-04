@@ -4,7 +4,7 @@ import com.panshen.com.rain.mPoint;
 
 import java.util.ArrayList;
 
-class MyPolygon {
+class Polygon {
     private int[] x;
     private int[] y;
     private int startX;
@@ -12,7 +12,7 @@ class MyPolygon {
     private int r;
     private ArrayList<mPoint> points = new ArrayList<>();
 
-    public MyPolygon(int[] x, int[] y,int r) {
+    public Polygon(int[] x, int[] y, int r) {
         this.x = x;
         this.y = y;
         startX = 0;

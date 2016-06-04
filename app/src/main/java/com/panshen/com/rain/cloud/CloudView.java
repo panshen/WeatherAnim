@@ -116,7 +116,7 @@ public class CloudView extends BaseView {
     @Override
     protected void init() {
         cb = new CloudBg(getWidth(), getHeight(), mContext, getResources().getColor(R.color.colorCloudBackground));
-        size = new ArrayList<Integer>();
+        size = new ArrayList();
         for (int i = 0; i < 5; i++) {
             size.add(new Random().nextInt(getWidth() / 20));
         }
