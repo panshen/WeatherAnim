@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <declare-styleable name="RainView">
+    <declare-styleable name="DustView">
         <!-- 雨点数量 -->
         <attr name="rainNum" format="integer"/>
         <!-- 雨点大小 -->

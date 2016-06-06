@@ -16,7 +16,8 @@ public class SunView extends BaseView {
     private SunBg mSunbg;
     private Halo mHalo;
     private Context mContext;
-    private ArrayList<SunBeam> mSunBeams = new ArrayList<SunBeam>();
+    private ArrayList<Sun> mSunBeams = new ArrayList<Sun>();
+
     public SunView(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
@@ -37,7 +38,7 @@ public class SunView extends BaseView {
 
     @Override
     protected void logic() {
-        for (SunBeam s : mSunBeams) {
+        for (Sun s : mSunBeams) {
             //s.move();
         }
     }
@@ -45,10 +46,10 @@ public class SunView extends BaseView {
     @Override
     protected void init() {
         mSunbg = new SunBg(getWidth(), getHeight(), mContext, getResources().getColor(R.color.colorCloudBackground));
-        mHalo = new Halo(20,getWidth(), getHeight(), mContext, getResources().getColor(R.color.colorCloudBackground));
+        mHalo = new Halo(20, getWidth(), getHeight(), mContext, getResources().getColor(R.color.colorCloudBackground));
         for (int i = 8; i >= 0; i--) {
             try {
-                SunBeam sunBeam = new SunBeam(20,getWidth(), getHeight(), mContext, mColors[i], i * 150);
+                Sun sunBeam = new Sun(20, getWidth(), getHeight(), mContext, mColors[i], i * 150);
                 mSunBeams.add(sunBeam);
             } catch (Exception e) {
 

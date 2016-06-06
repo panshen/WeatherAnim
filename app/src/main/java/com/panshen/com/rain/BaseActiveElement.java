@@ -2,10 +2,8 @@ package com.panshen.com.rain;
 
 import android.graphics.Canvas;
 
-public interface Beam {
+public interface BaseActiveElement extends BaseElement {
     void move();
-
-    void draw(Canvas canvas);
 
     void ControlX(float i);
 

@@ -1,20 +1,12 @@
 package com.panshen.com.rain.cloud;
 
-import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Paint;
-import android.util.Log;
-import android.view.animation.AccelerateDecelerateInterpolator;
-import android.view.animation.Animation;
-import android.view.animation.Transformation;
 
-import com.panshen.com.rain.Beam;
+import com.panshen.com.rain.BaseActiveElement;
 
-import java.util.Random;
-
-public class CloudBg implements Beam{
+public class CloudBg implements BaseActiveElement {
     private Paint mPaint;
     private int radius, x, y;
     private Context mContext;

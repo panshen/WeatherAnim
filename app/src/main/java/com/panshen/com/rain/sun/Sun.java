@@ -5,14 +5,13 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Path;
 
-import com.panshen.com.rain.Beam;
+import com.panshen.com.rain.BaseActiveElement;
 import com.panshen.com.rain.Polygon;
 import com.panshen.com.rain.mPoint;
 
 import java.util.ArrayList;
 
-//pathmeasure
-public class SunBeam implements Beam {
+public class Sun implements BaseActiveElement {
     private Paint mPaint;
     private int mWidth, mHeight;
     private int mColor;
@@ -23,7 +22,7 @@ public class SunBeam implements Beam {
     private int PolygonWidth;
     Path path;
 
-    public SunBeam(int xxx,int width, int height, Context context, int color, int PW) {
+    public Sun(int xxx, int width, int height, Context context, int color, int PW) {
         mWidth = width;
         mHeight = height;
         mColor = color;

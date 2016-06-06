@@ -12,11 +12,13 @@ public abstract class BaseView extends View implements SensorEventListener {
 
     private MyThread thread;
     private boolean running = true;
-    SensorManager sm;
-    Sensor sensor;
+    private SensorManager sm;
+    private Sensor sensor;
     private Context context;
+
     public BaseView(Context context, AttributeSet attrs) {
         super(context, attrs);
+        this.context = context;
     }
 
     public BaseView(Context context) {
@@ -26,7 +28,7 @@ public abstract class BaseView extends View implements SensorEventListener {
 
     protected abstract void drawSub(Canvas canvas);
 
-    protected  abstract void logic();
+    protected abstract void logic();
 
     protected abstract void init();
 
@@ -41,7 +43,7 @@ public abstract class BaseView extends View implements SensorEventListener {
                 postInvalidate();//draw
 
                 try {
-                    Thread.sleep(15);
+                    Thread.sleep(10);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -65,7 +67,7 @@ public abstract class BaseView extends View implements SensorEventListener {
         super.onAttachedToWindow();
         sm = (SensorManager) context.getSystemService(Context.SENSOR_SERVICE);
         sensor = sm.getDefaultSensor(Sensor.TYPE_GRAVITY);
-        sm.registerListener(this, sensor, SensorManager.SENSOR_DELAY_GAME);
+        sm.registerListener(this, sensor, SensorManager.SENSOR_DELAY_FASTEST);
     }
 
     @Override
@@ -74,5 +76,4 @@ public abstract class BaseView extends View implements SensorEventListener {
         running = false;
         sm.unregisterListener(this);
     }
-
 }

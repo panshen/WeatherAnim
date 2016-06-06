@@ -21,6 +21,7 @@ public class SunNightView extends BaseView {
     private int[] CircleLength = {120,80,200,50};
     public SunNightView(Context context, AttributeSet attrs) {
         super(context, attrs);
+        this.mContext = context;
     }
 
     public SunNightView(Context context) {

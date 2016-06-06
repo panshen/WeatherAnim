@@ -4,9 +4,9 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.RectF;
 
-import com.panshen.com.rain.Beam;
+import com.panshen.com.rain.BaseActiveElement;
 
-public class SunNight implements Beam {
+public class SunNight implements BaseActiveElement {
     private Paint mPaint;
     private RectF mRectF;
     private RectF mRectFCircle;
@@ -60,7 +60,10 @@ public class SunNight implements Beam {
         canvas.save();
         canvas.translate(cX, cY);
         canvas.rotate(mRate);
-
+        /*
+        * 半径越大转的越快产生旋转不一致的感觉。
+        * 应该让圆弧长度不一样 而速率一样
+        * */
         mRate += redius / 1000f;
         if (mRate >= 360.0f) mRate = 0.0f;
         if (redius / 200 == 1 || redius / 700 == 1 || redius / 800 == 1 || redius / 1100 == 1)

@@ -4,11 +4,11 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 
-import com.panshen.com.rain.Beam;
+import com.panshen.com.rain.BaseActiveElement;
 
 import java.util.Random;
 
-public class Cloud implements Beam {
+public class Cloud implements BaseActiveElement {
     private Paint mPaint;
     private float radius, x, y;
     private Context mContext;

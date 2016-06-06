@@ -23,5 +23,5 @@
     <color name="colorSunNight1">#a5c9d7</color>
     <color name="colorSunNight2">#75b8c0</color>
     <color name="colorSunNight3">#feffff</color>
-
+    <color name="colorDust">#455d69</color>
 </resources>

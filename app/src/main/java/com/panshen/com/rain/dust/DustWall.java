@@ -1,17 +1,15 @@
-package com.panshen.com.rain.sun;
+package com.panshen.com.rain.dust;
 
-import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 
-import com.panshen.com.rain.BaseActiveElement;
+import com.panshen.com.rain.BaseElement;
 
-
-public class SunBg implements BaseActiveElement {
+public class DustWall implements BaseElement {
     private Paint mPaint;
     private int mWidth, mHeight;
     private int mColor;
-    public SunBg(int width, int height, Context context, int color) {
+    public DustWall(int width, int height, int color) {
         mWidth = width;
         mHeight = height;
         mColor = color;
@@ -23,22 +21,7 @@ public class SunBg implements BaseActiveElement {
         mPaint.setColor(mColor);
     }
 
-    @Override
-    public void move() {
-
-    }
-
     public void draw(Canvas canvas) {
         canvas.drawRect(0, 0, mWidth, mHeight, mPaint);
-    }
-
-    @Override
-    public void ControlX(float i) {
-
-    }
-
-    @Override
-    public void ControlY(float i) {
-
     }
 }
