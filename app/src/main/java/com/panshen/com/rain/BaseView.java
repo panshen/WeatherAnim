@@ -19,12 +19,22 @@ public abstract class BaseView extends View implements SensorEventListener {
     public BaseView(Context context, AttributeSet attrs) {
         super(context, attrs);
         this.context = context;
+
+        sm = (SensorManager) context.getSystemService(Context.SENSOR_SERVICE);
+        sensor = sm.getDefaultSensor(getSensorType());
+        sm.registerListener(this, sensor, SensorManager.SENSOR_DELAY_FASTEST);
     }
 
     public BaseView(Context context) {
         super(context);
         this.context = context;
+
+        sm = (SensorManager) context.getSystemService(Context.SENSOR_SERVICE);
+        sensor = sm.getDefaultSensor(getSensorType());
+        sm.registerListener(this, sensor, SensorManager.SENSOR_DELAY_FASTEST);
     }
+
+    protected abstract int getSensorType();
 
     protected abstract void drawSub(Canvas canvas);
 
@@ -40,7 +50,7 @@ public abstract class BaseView extends View implements SensorEventListener {
 
                 logic();
 
-                postInvalidate();//draw
+                postInvalidate();
 
                 try {
                     Thread.sleep(10);
@@ -61,14 +71,6 @@ public abstract class BaseView extends View implements SensorEventListener {
         }
     }
 
-
-    @Override
-    protected void onAttachedToWindow() {
-        super.onAttachedToWindow();
-        sm = (SensorManager) context.getSystemService(Context.SENSOR_SERVICE);
-        sensor = sm.getDefaultSensor(Sensor.TYPE_GRAVITY);
-        sm.registerListener(this, sensor, SensorManager.SENSOR_DELAY_FASTEST);
-    }
 
     @Override
     protected void onDetachedFromWindow() {

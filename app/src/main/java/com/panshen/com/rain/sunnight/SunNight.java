@@ -47,11 +47,11 @@ public class SunNight implements BaseActiveElement {
     }
 
 
-    public void ControlY(float i) {
+    public void SetY(float i) {
         cY = i * 30;
     }
 
-    public void ControlX(float i) {
+    public void SetX(float i) {
         cX = (xxx + i) * 20 - mWidth / 2;
     }
 

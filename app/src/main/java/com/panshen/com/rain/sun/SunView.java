@@ -12,7 +12,14 @@ import com.panshen.com.rain.R;
 import java.util.ArrayList;
 
 public class SunView extends BaseView {
-    private int[] mColors = {getResources().getColor(R.color.colorSun), getResources().getColor(R.color.colorSunn), getResources().getColor(R.color.colorSunnn), getResources().getColor(R.color.colorSunnnn), getResources().getColor(R.color.colorSunnnnn), getResources().getColor(R.color.colorSunnnnnn), getResources().getColor(R.color.colorSunnnnnnn), getResources().getColor(R.color.colorSunnnnnnnn)};
+    private int[] mColors = {getResources().getColor(R.color.colorSun),
+            getResources().getColor(R.color.colorSunn),
+            getResources().getColor(R.color.colorSunnn),
+            getResources().getColor(R.color.colorSunnnn),
+            getResources().getColor(R.color.colorSunnnnn),
+            getResources().getColor(R.color.colorSunnnnnn),
+            getResources().getColor(R.color.colorSunnnnnnn),
+            getResources().getColor(R.color.colorSunnnnnnnn)};
     private SunBg mSunbg;
     private Halo mHalo;
     private Context mContext;
@@ -28,6 +35,11 @@ public class SunView extends BaseView {
     }
 
     @Override
+    protected int getSensorType() {
+        return Sensor.TYPE_GRAVITY;
+    }
+
+    @Override
     protected void drawSub(Canvas canvas) {
         mSunbg.draw(canvas);
         for (int i = 0; i < mSunBeams.size(); i++) {
@@ -38,21 +50,21 @@ public class SunView extends BaseView {
 
     @Override
     protected void logic() {
-        for (Sun s : mSunBeams) {
-            //s.move();
-        }
+//        for (Sun s : mSunBeams) {
+//            //s.move();
+//        }
     }
 
     @Override
     protected void init() {
-        mSunbg = new SunBg(getWidth(), getHeight(), mContext, getResources().getColor(R.color.colorCloudBackground));
-        mHalo = new Halo(20, getWidth(), getHeight(), mContext, getResources().getColor(R.color.colorCloudBackground));
-        for (int i = 8; i >= 0; i--) {
+        mSunbg = new SunBg(getWidth(), getHeight(), mContext, getResources().getColor(R.color.colorCloudDay));
+        mHalo = new Halo(20, getWidth(), getHeight(), mContext, getResources().getColor(R.color.colorCloudBackgroundDay));
+        for (int i = mColors.length; i >= 0; i--) {
             try {
                 Sun sunBeam = new Sun(20, getWidth(), getHeight(), mContext, mColors[i], i * 150);
                 mSunBeams.add(sunBeam);
             } catch (Exception e) {
-
+                e.printStackTrace();
             }
         }
     }
@@ -60,11 +72,12 @@ public class SunView extends BaseView {
     @Override
     public void onSensorChanged(SensorEvent event) {
         for (int i = 0; i < mSunBeams.size(); i++) {
-            mSunBeams.get(i).ControlY(event.values[1]);
-            mSunBeams.get(i).ControlX(event.values[0]);
+            mSunBeams.get(i).SetY(event.values[1]);
+            mSunBeams.get(i).SetX(event.values[0]);
 
-            mHalo.ControlY(event.values[1]);
-            mHalo.ControlX(event.values[0]);
+            mHalo.SetY(event.values[1]);
+            mHalo.SetX(event.values[0]);
+            mHalo.Alpha(event.values[2]);
         }
     }
 
@@ -72,4 +85,5 @@ public class SunView extends BaseView {
     public void onAccuracyChanged(Sensor sensor, int accuracy) {
 
     }
+
 }

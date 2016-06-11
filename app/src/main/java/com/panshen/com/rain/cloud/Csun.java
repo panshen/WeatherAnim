@@ -1,6 +1,5 @@
 package com.panshen.com.rain.cloud;
 
-import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 
@@ -8,36 +7,36 @@ import com.panshen.com.rain.BaseActiveElement;
 
 import java.util.Random;
 
-public class Cloud implements BaseActiveElement {
+
+public class Csun implements BaseActiveElement {
     private Paint mPaint;
     private float radius, x, y;
-    private Context mContext;
     private int mWidth, mHeight;
     private int mColor;
     private int xx;
-    private int moveRate;
     private Random random;
-    private float CenterY;
 
-    public Cloud(int xx, int width, int height, Context context, int color) {
+    /**
+     * xx 不知道
+     * width view宽 height 高
+     * color 颜色
+     */
+    public Csun(int width, int height, int color) {
         this.mWidth = width;
-        this.xx = xx;
         this.mHeight = height;
-        this.mContext = context;
         this.mColor = color;
         random = new Random();
         init();
     }
 
     private void init() {
+        this.xx = mWidth / 35;
         mPaint = new Paint();
         mPaint.setColor(mColor);
-        this.radius = mWidth / 4 + new Random().nextInt(200);
-        this.moveRate = random.nextInt((int) radius / 5);
-        this.x = random.nextInt(mWidth);
-        this.y = random.nextInt(100);
+        this.radius = mWidth / 8;
+        this.x = mWidth - 200;
+        this.y = 350;
 
-        CenterY = random.nextInt(100);
 
     }
 
@@ -50,23 +49,18 @@ public class Cloud implements BaseActiveElement {
     }
 
     public void SetY(float i) {
-        y = i * 20;
+        y = ((xx / 2 + i) * 20);
     }
 
     public void ControlY(float i) {
-        CenterY = i;
+
     }
 
-    public void ControlX(float i) {
-        x = i;
-    }
-
+    @Override
     public void draw(Canvas canvas) {
-        canvas.save();
-        canvas.translate(0, CenterY);
 
         canvas.drawCircle(x, y, radius, mPaint);
 
-        canvas.restore();
     }
 }
+

@@ -33,12 +33,12 @@ public class SunBg implements BaseActiveElement {
     }
 
     @Override
-    public void ControlX(float i) {
+    public void SetX(float i) {
 
     }
 
     @Override
-    public void ControlY(float i) {
+    public void SetY(float i) {
 
     }
 }

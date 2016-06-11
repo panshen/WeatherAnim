@@ -58,11 +58,11 @@ public class Sun implements BaseActiveElement {
     }
 
 
-    public void ControlY(float i) {
+    public void SetY(float i) {
         cY = i * 30;
     }
 
-    public void ControlX(float i) {
+    public void SetX(float i) {
         cX = (xxx + i)*30;
     }
 
@@ -72,7 +72,7 @@ public class Sun implements BaseActiveElement {
         canvas.translate(cX, cY);
         canvas.rotate(xx);
 
-        xx += (float) PolygonWidth / 1000;
+        xx += (float) PolygonWidth / 1500;
         if (xx >= 360.0f) xx = 0.0f;
 
         canvas.drawPath(path, mPaint);

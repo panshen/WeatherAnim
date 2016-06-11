@@ -30,6 +30,11 @@ public class SunNightView extends BaseView {
     }
 
     @Override
+    protected int getSensorType() {
+        return Sensor.TYPE_GRAVITY;
+    }
+
+    @Override
     protected void drawSub(Canvas canvas) {
         mSunbg.draw(canvas);
         for (int i = 0; i < mSunNights.size(); i++) {
@@ -60,8 +65,8 @@ public class SunNightView extends BaseView {
     @Override
     public void onSensorChanged(SensorEvent event) {
         for (int i = 0; i < mSunNights.size(); i++) {
-            mSunNights.get(i).ControlY(event.values[1]);
-            mSunNights.get(i).ControlX(event.values[0]);
+            mSunNights.get(i).SetY(event.values[1]);
+            mSunNights.get(i).SetX(event.values[0]);
         }
     }
 

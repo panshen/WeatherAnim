@@ -30,6 +30,8 @@ public class Dust implements BaseActiveElement {
         init();
     }
 
+
+
     private void init() {
         paint.reset();
         paint.setStrokeWidth(2);
@@ -56,12 +58,12 @@ public class Dust implements BaseActiveElement {
     }
 
     @Override
-    public void ControlX(float i) {
+    public void SetX(float i) {
         X += i;
     }
 
     @Override
-    public void ControlY(float i) {
+    public void SetY(float i) {
         Y += i;
     }
 

@@ -1,20 +1,16 @@
 package com.panshen.com.rain.cloud;
+//多云 白天--白色的云 橘黄色太阳 蓝色背景     夜晚--深色背景和闪动的星星 深色云 浅黄色太阳
 
-import android.animation.Animator;
-import android.animation.AnimatorListenerAdapter;
 import android.animation.ValueAnimator;
 import android.content.Context;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.util.AttributeSet;
-import android.view.animation.AccelerateDecelerateInterpolator;
-import android.view.animation.OvershootInterpolator;
 
 import com.panshen.com.rain.BaseView;
+import com.panshen.com.rain.activity.Utils;
 import com.panshen.com.rain.mPoint;
-import com.panshen.com.rain.PointEvaluator;
 import com.panshen.com.rain.R;
 
 import java.util.ArrayList;
@@ -22,22 +18,40 @@ import java.util.Random;
 
 public class CloudView extends BaseView {
     private Context mContext;
-    CloudBg cb;
+    private CloudBg cloudBg;
     private ArrayList<Cloud> clouds = new ArrayList<>();
+    private ArrayList<CloudStar> stars = new ArrayList<>();
     mPoint currentMPoint;
-    private int[] colors = {Color.parseColor("#9ea8b1b4"), Color.parseColor("#9fffffff"), Color.parseColor("#9e3a4859")};
-    private ArrayList<Integer> size = null;
+    private int mCouldColor = 0;
+    private int mCouldBackColor = 0;
+    private int mCouldSunColor = 0;
+    private Csun csun = null;
+    private mode mMode;
 
     public CloudView(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
 
-    public CloudView(Context context) {
+    public CloudView(Context context, mode mmode) {
         super(context);
         mContext = context;
         currentMPoint = new mPoint(0, getHeight());
-        //StartDropAnim();
-        //StartReverseAnimY();
+        this.mMode = mmode;
+        StartReverseYAnim();
+        if (mMode.equals(mode.DAY)) {
+            mCouldColor = getResources().getColor(R.color.colorCloudDay);
+            mCouldSunColor = getResources().getColor(R.color.colorCloudSunDay);
+            mCouldBackColor = getResources().getColor(R.color.colorCloudBackgroundDay);
+        } else if (mMode.equals(mode.NIGHT)) {
+            mCouldColor = getResources().getColor(R.color.colorCloudNight);
+            mCouldSunColor = getResources().getColor(R.color.colorCloudSunNight);
+            mCouldBackColor = getResources().getColor(R.color.colorCloudBackgroundNight);
+        }
+    }
+
+    @Override
+    protected int getSensorType() {
+        return Sensor.TYPE_GRAVITY;
     }
 
     @Override
@@ -45,68 +59,42 @@ public class CloudView extends BaseView {
         super.onDetachedFromWindow();
     }
 
-    public void StartDropAnim() {
-        mPoint startMPoint = new mPoint(0, -1000);
-        mPoint endMPoint = new mPoint(0, 0);
-        ValueAnimator DropAnim = ValueAnimator.ofObject(new PointEvaluator(), startMPoint, endMPoint);
-        DropAnim.setDuration(1500);
-        DropAnim.setInterpolator(new OvershootInterpolator());
-        DropAnim.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+    public void StartReverseYAnim() {
+        ValueAnimator animator = Utils.getAnim();
+        animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
             public void onAnimationUpdate(ValueAnimator animation) {
                 currentMPoint = (mPoint) animation.getAnimatedValue();
                 for (Cloud mcl : clouds) {
-                    mcl.ControlY((int) currentMPoint.getY());
+                    csun.ControlY(currentMPoint.getY());
+                    mcl.ControlY(currentMPoint.getY());
                 }
             }
         });
-        DropAnim.addListener(new AnimatorListenerAdapter() {
-            @Override
-            public void onAnimationEnd(Animator animation) {
-                super.onAnimationEnd(animation);
-                // StartReverseAnimY();
-                for (Cloud mcl : clouds) {
-                    //mcl.AnimEnd();
-                }
-            }
-        });
-        DropAnim.start();
+        animator.start();
     }
-
-    public void StartReverseAnimY() {
-        mPoint startMPoint = new mPoint(0, 0);
-        mPoint endMPoint = new mPoint(0, -100);
-        ValueAnimator ReverseAnim = ValueAnimator.ofObject(new PointEvaluator(), startMPoint, endMPoint);
-        ReverseAnim.setDuration(2000);
-        ReverseAnim.setInterpolator(new AccelerateDecelerateInterpolator());
-        ReverseAnim.setRepeatCount(ValueAnimator.INFINITE);
-        ReverseAnim.setRepeatMode(ValueAnimator.REVERSE);
-        ReverseAnim.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-            @Override
-            public void onAnimationUpdate(ValueAnimator animation) {
-                currentMPoint = (mPoint) animation.getAnimatedValue();
-                for (Cloud mcl : clouds) {
-                    mcl.ControlY((int) currentMPoint.getY());
-                }
-            }
-        });
-        ReverseAnim.start();
-    }
-
 
     @Override
     protected void drawSub(Canvas canvas) {
-        if (clouds.size() != 0 && cb != null) {
-            cb.draw(canvas);
-            for (Cloud mcl : clouds) {
-                mcl.draw(canvas);
+        if (clouds.size() != 0 && cloudBg != null) {
+
+            cloudBg.draw(canvas);
+            if(mMode.equals(mode.NIGHT))
+            for(int i = 0;i<stars.size();i++){
+                stars.get(i).draw(canvas);
+            }
+
+            for (int i = 0; i < clouds.size(); i++) {
+                if (i == clouds.size() - 2) csun.draw(canvas);
+                clouds.get(i).draw(canvas);
             }
         }
+
     }
 
     @Override
     protected void logic() {
-        if (clouds.size() != 0 && cb != null) {
+        if (clouds.size() != 0 && cloudBg != null) {
             for (Cloud mcl : clouds) {
                 mcl.move();
             }
@@ -115,27 +103,35 @@ public class CloudView extends BaseView {
 
     @Override
     protected void init() {
-        cb = new CloudBg(getWidth(), getHeight(), mContext, getResources().getColor(R.color.colorCloudBackground));
-        size = new ArrayList();
+        cloudBg = new CloudBg(getWidth(), getHeight(),mContext, mCouldBackColor);
+        csun = new Csun(getWidth(), getHeight(), mCouldSunColor);
         for (int i = 0; i < 5; i++) {
-            size.add(new Random().nextInt(getWidth() / 20));
-        }
-        for (int i = 0; i < 5; i++) {
-            Cloud cloud = new Cloud(size.get(i), getWidth(), getHeight(), mContext, colors[new Random().nextInt(colors.length)]);
+            Cloud cloud = new Cloud(new Random().nextInt(getWidth() / 20), getWidth(), getHeight(), mContext, mCouldColor);
             clouds.add(cloud);
+        }
+        for(int i = 0; i < 35; i++){
+            CloudStar cloud = new CloudStar(new Random().nextInt(getWidth() / 20), getWidth(), getHeight(), mContext, mCouldColor);
+            stars.add(cloud);
         }
     }
 
     @Override
     public void onSensorChanged(SensorEvent event) {
         for (Cloud mcl : clouds) {
-            mcl.ControlY(event.values[1]);
-            mcl.ControlX(event.values[0]);
+            mcl.SetY(event.values[1]);
+            mcl.SetX(event.values[0]);
+
+            csun.SetY(event.values[1]);
+            csun.SetX(event.values[0]);
         }
     }
 
     @Override
     public void onAccuracyChanged(Sensor sensor, int accuracy) {
 
+    }
+
+    public enum mode {
+        DAY, NIGHT
     }
 }

@@ -5,7 +5,7 @@ import android.graphics.Canvas;
 public interface BaseActiveElement extends BaseElement {
     void move();
 
-    void ControlX(float i);
+    void SetX(float i);
 
-    void ControlY(float i);
+    void SetY(float i);
 }

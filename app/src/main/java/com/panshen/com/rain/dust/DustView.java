@@ -2,10 +2,8 @@ package com.panshen.com.rain.dust;
 
 
 import java.util.ArrayList;
-import java.util.Random;
 
 import android.content.Context;
-import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
@@ -28,18 +26,23 @@ public class DustView extends BaseView {
     public DustView(Context context, AttributeSet attrs) {
         super(context, attrs);
 
-        TypedArray ta = context.obtainStyledAttributes(attrs,
-                R.styleable.DustView);
-
-        rainNum = ta.getInteger(R.styleable.DustView_rainNum, 200);
-        size = ta.getInteger(R.styleable.DustView_size, 20);
-        rainColor = ta.getInteger(R.styleable.DustView_rainColor, 0xffffffff);
-        randColor = ta.getBoolean(R.styleable.DustView_randColor, false);
-        ta.recycle();
+//        TypedArray ta = context.obtainStyledAttributes(attrs,
+//                R.styleable.DustView);
+//
+//        rainNum = ta.getInteger(R.styleable.DustView_rainNum, 200);
+//        size = ta.getInteger(R.styleable.DustView_size, 20);
+//        rainColor = ta.getInteger(R.styleable.DustView_rainColor, 0xffffffff);
+//        randColor = ta.getBoolean(R.styleable.DustView_randColor, false);
+//        ta.recycle();
     }
 
     public DustView(Context context) {
         super(context);
+    }
+
+    @Override
+    protected int getSensorType() {
+        return Sensor.TYPE_ROTATION_VECTOR;
     }
 
     @Override
@@ -70,12 +73,12 @@ public class DustView extends BaseView {
     @Override
     public void onSensorChanged(SensorEvent event) {
         if(perpared) {
-            Log.i("x", event.values[0] + "");//横向
-            Log.i("y", event.values[1] + "");//纵向
-            Log.i("z", event.values[2] + "");//垂直
+            Log.i("x", event.values[0] + "");
+            Log.i("y", event.values[1] + "");
+            Log.i("z", event.values[2] + "");
             for (Dust item : list) {
-                item.ControlX(event.values[0]);
-                item.ControlY(event.values[1]);
+                item.SetX(event.values[0]);
+                item.SetY(event.values[1]);
                 item.ControlZ(event.values[2]);
             }
         }

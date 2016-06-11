@@ -3,21 +3,31 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
-    <color name="colorCloudBackground">#92a5ac</color>
     <color name="colorTransBGC">#93aaab</color>
 
     <color name="colorTransGray">#9ea8b1b4</color>
     <color name="colorTransWhite">#9fffffff</color>
     <color name="colorTransDeepBlue">#9e3a4859</color>
 
+    <color name="colorCloudSunDay">#bdfdda29</color>
+    <color name="colorCloudSunNight">#faffbf</color>
+    <color name="colorCloudBackgroundDay">#4b97d3</color>
+    <color name="colorCloudBackgroundNight">#031323</color>
+    <color name="colorCloudDay">#99ffffff</color>
+    <color name="colorCloudNight">#d00e5194</color>
+
+    <color name="colorOverCast0">#9ea8b1b4</color>
+    <color name="colorOverCast1">#92ffffff</color>
+    <color name="colorOverCast2">#9e3a4859</color>
+
     <color name="colorSun">#d04727</color>
-    <color name="colorSunn">#d46432</color>
+    <color name="colorSunn">#d36331</color>
     <color name="colorSunnn">#d67639</color>
-    <color name="colorSunnnn">#d88a40</color>
+    <color name="colorSunnnn">#d98a3f</color>
     <color name="colorSunnnnn">#d8a146</color>
-    <color name="colorSunnnnnn">#d3b756</color>
-    <color name="colorSunnnnnnn">#c1c676</color>
-    <color name="colorSunnnnnnnn">#9dc8aa</color>
+    <color name="colorSunnnnnn">#d3b555</color>
+    <color name="colorSunnnnnnn">#c2c775</color>
+    <color name="colorSunnnnnnnn">#a0c9a7</color>
 
     <color name="colorSunNightWall">#09213d</color>
     <color name="colorSunNight1">#a5c9d7</color>
