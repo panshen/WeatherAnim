@@ -3,8 +3,6 @@ package com.panshen.com.rain;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import com.panshen.com.rain.fragment.frag_cloud;
-import com.panshen.com.rain.fragment.frag_rain;
 
 import java.util.ArrayList;
 

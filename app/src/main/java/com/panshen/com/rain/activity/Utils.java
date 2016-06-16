@@ -1,24 +1,17 @@
 package com.panshen.com.rain.activity;
 
-import android.animation.Animator;
-import android.animation.AnimatorListenerAdapter;
 import android.animation.ValueAnimator;
 import android.view.animation.AccelerateDecelerateInterpolator;
-import android.view.animation.OvershootInterpolator;
 
 import com.panshen.com.rain.PointEvaluator;
-import com.panshen.com.rain.cloud.Cloud;
 import com.panshen.com.rain.mPoint;
 
-/**
- * Created by Z on 2016/6/11.
- */
 public class Utils  {
-    public static ValueAnimator getAnim(){
+    public static ValueAnimator getAnim(int dur){
         mPoint startMPoint = new mPoint(0, 0);
         mPoint endMPoint = new mPoint(0, -100);
         ValueAnimator ReverseAnim = ValueAnimator.ofObject(new PointEvaluator(), startMPoint, endMPoint);
-        ReverseAnim.setDuration(2000);
+        ReverseAnim.setDuration(dur);
         ReverseAnim.setInterpolator(new AccelerateDecelerateInterpolator());
         ReverseAnim.setRepeatCount(ValueAnimator.INFINITE);
         ReverseAnim.setRepeatMode(ValueAnimator.REVERSE);

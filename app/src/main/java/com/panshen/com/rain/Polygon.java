@@ -1,6 +1,5 @@
 package com.panshen.com.rain;
 
-import com.panshen.com.rain.mPoint;
 
 import java.util.ArrayList;
 

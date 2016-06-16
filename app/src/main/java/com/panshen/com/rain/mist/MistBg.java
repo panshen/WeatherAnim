@@ -1,26 +1,31 @@
-package com.panshen.com.rain.cloud;
+package com.panshen.com.rain.mist;
 
 import android.content.Context;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Paint;
 
 import com.panshen.com.rain.BaseActiveElement;
 import com.panshen.com.rain.R;
 
-class CloudBg implements BaseActiveElement {
+public class MistBg implements BaseActiveElement {
     private Paint mPaint;
     private int mWidth, mHeight;
     private int mColor;
     private boolean daymode;
     private Context mContext;
 
-    public CloudBg(int width, int height, Context context, int color) {
+    /**
+     * width 屏幕宽度
+     * height 屏幕高度
+     * color  背景主要颜色
+     */
+    public MistBg(int width, int height, Context context, int color) {
         mWidth = width;
         mHeight = height;
         mColor = color;
         mContext = context;
         init();
+
     }
 
     public void init() {

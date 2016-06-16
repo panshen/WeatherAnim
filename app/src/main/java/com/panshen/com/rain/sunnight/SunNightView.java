@@ -44,9 +44,6 @@ public class SunNightView extends BaseView {
 
     @Override
     protected void logic() {
-//        for (SunNight s : mSunNights) {
-//            //s.move();
-//        }
     }
 
     @Override
@@ -73,5 +70,13 @@ public class SunNightView extends BaseView {
     @Override
     public void onAccuracyChanged(Sensor sensor, int accuracy) {
 
+    }
+
+    @Override
+    protected void onDetachedFromWindow() {
+        super.onDetachedFromWindow();
+        mSunNights.clear();
+        mSunNights = null;
+        System.gc();
     }
 }

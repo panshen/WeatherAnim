@@ -7,7 +7,7 @@ import android.graphics.Paint;
 import com.panshen.com.rain.BaseActiveElement;
 
 
-public class SunBg implements BaseActiveElement {
+ class SunBg implements BaseActiveElement {
     private Paint mPaint;
     private int mWidth, mHeight;
     private int mColor;

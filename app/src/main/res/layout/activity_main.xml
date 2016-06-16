@@ -7,7 +7,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="300dp"
+        android:layout_height="320dp"
         android:orientation="horizontal">
 
         <com.panshen.com.rain.dust.DustView
@@ -24,7 +24,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="300dp"
+        android:layout_height="320dp"
         android:orientation="horizontal">
 
         <com.panshen.com.rain.sunnight.SunNightView
@@ -36,8 +36,6 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="0.5" />
-
     </LinearLayout>
-
 
 </LinearLayout>

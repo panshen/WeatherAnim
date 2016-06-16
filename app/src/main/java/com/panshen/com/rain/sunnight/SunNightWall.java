@@ -4,7 +4,7 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 
-public class SunNightWall {
+ class SunNightWall {
     private Paint mPaint;
     private int mWidth, mHeight;
     private int mColor;

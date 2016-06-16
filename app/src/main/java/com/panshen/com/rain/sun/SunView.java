@@ -50,16 +50,13 @@ public class SunView extends BaseView {
 
     @Override
     protected void logic() {
-//        for (Sun s : mSunBeams) {
-//            //s.move();
-//        }
     }
 
     @Override
     protected void init() {
         mSunbg = new SunBg(getWidth(), getHeight(), mContext, getResources().getColor(R.color.colorCloudDay));
         mHalo = new Halo(20, getWidth(), getHeight(), mContext, getResources().getColor(R.color.colorCloudBackgroundDay));
-        for (int i = mColors.length; i >= 0; i--) {
+        for (int i = mColors.length-1; i >= 0; i--) {
             try {
                 Sun sunBeam = new Sun(20, getWidth(), getHeight(), mContext, mColors[i], i * 150);
                 mSunBeams.add(sunBeam);
@@ -86,4 +83,11 @@ public class SunView extends BaseView {
 
     }
 
+    @Override
+    protected void onDetachedFromWindow() {
+        super.onDetachedFromWindow();
+        mSunBeams.clear();
+        mSunBeams = null;
+        System.gc();
+    }
 }

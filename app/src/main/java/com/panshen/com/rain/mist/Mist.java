@@ -1,41 +1,41 @@
-package com.panshen.com.rain.cloud;
+package com.panshen.com.rain.mist;
+//此类代表一排 根据屏幕宽度 显示几个圆 一个圆 = 50dp
 
-import android.animation.ValueAnimator;
+//Y轴坐标由view类传递进来
+
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 
 import com.panshen.com.rain.BaseActiveElement;
-import com.panshen.com.rain.activity.Utils;
 import com.panshen.com.rain.mPoint;
 
 import java.util.Random;
 
- class Cloud implements BaseActiveElement {
+public class Mist implements BaseActiveElement {
     private Paint mPaint;
-    private float radius, x, y;
+    private float radius = 300f, x, y;
     private int mWidth, mHeight;
     private int mColor;
     private int xx;
     private Random random;
     private float CenterY;
     mPoint currentMPoint;
-    public Cloud(int xx, int width, int height, Context context, int color) {
+
+    public Mist(int y, int xx, int width, int height, Context context, int color) {
         this.mWidth = width;
         this.xx = xx;
+        this.y = y;
         this.mHeight = height;
         this.mColor = color;
         random = new Random();
         init();
     }
 
-
     private void init() {
         mPaint = new Paint();
         mPaint.setColor(mColor);
-        this.radius = mWidth / 3 + new Random().nextInt(200);
         this.x = random.nextInt(mWidth);
-        this.y = random.nextInt(100);
         CenterY = random.nextInt(100);
         currentMPoint = new mPoint(0, mHeight);
     }
@@ -45,11 +45,11 @@ import java.util.Random;
     }
 
     public void SetX(float i) {
-        x = ((xx + i) * 30);
+        //x = ((xx + i) * 30);
     }
 
     public void SetY(float i) {
-        y = i * 20;
+        //y = i * 20;
     }
 
     public void ControlY(float i) {
@@ -62,10 +62,10 @@ import java.util.Random;
 
     public void draw(Canvas canvas) {
         canvas.save();
-        canvas.translate(0, CenterY);
-
-        canvas.drawCircle(x, y, radius, mPaint);
-
+        canvas.translate(-100, CenterY);
+        for (int i = 1; i < mWidth / radius+2; i++) {
+            canvas.drawCircle(i*radius, y, radius, mPaint);
+        }
         canvas.restore();
     }
 }

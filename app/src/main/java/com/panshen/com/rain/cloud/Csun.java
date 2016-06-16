@@ -8,7 +8,7 @@ import com.panshen.com.rain.BaseActiveElement;
 import java.util.Random;
 
 
-public class Csun implements BaseActiveElement {
+ class Csun implements BaseActiveElement {
     private Paint mPaint;
     private float radius, x, y;
     private int mWidth, mHeight;

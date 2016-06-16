@@ -14,11 +14,17 @@
     <color name="colorCloudBackgroundDay">#4b97d3</color>
     <color name="colorCloudBackgroundNight">#031323</color>
     <color name="colorCloudDay">#99ffffff</color>
-    <color name="colorCloudNight">#d00e5194</color>
+    <color name="colorCloudNight">#cf15304d</color>
+    <color name="colorCloudNightt">#9a15304d</color>
+    <color name="colorCloudNighttt">#cc2f5a7d</color>
+    <color name="colorCloudNightttt">#e615304d</color>
 
-    <color name="colorOverCast0">#9ea8b1b4</color>
-    <color name="colorOverCast1">#92ffffff</color>
-    <color name="colorOverCast2">#9e3a4859</color>
+
+    <color name="colorOverCast">#c65b6f76</color>
+    <color name="colorOverCastt">#d6687980</color>
+    <color name="colorOverCasttt">#de394d56</color>
+    <color name="colorOverCastttt">#93151e25</color>
+    <color name="colorOverCastBG">#151e25</color>
 
     <color name="colorSun">#d04727</color>
     <color name="colorSunn">#d36331</color>
@@ -29,9 +35,16 @@
     <color name="colorSunnnnnnn">#c2c775</color>
     <color name="colorSunnnnnnnn">#a0c9a7</color>
 
+    <color name="colorMist">#f4151e25</color>
+    <color name="colorMistt">#e6151e25</color>
+    <color name="colorMisttt">#d2151e25</color>
+    <color name="colorMistttt">#ce151e25</color>
+    <color name="colorMisttttt">#c1151e25</color>
+
     <color name="colorSunNightWall">#09213d</color>
     <color name="colorSunNight1">#a5c9d7</color>
     <color name="colorSunNight2">#75b8c0</color>
     <color name="colorSunNight3">#feffff</color>
-    <color name="colorDust">#455d69</color>
+    <color name="colorDustWall">#455d69</color>
+    <color name="colorDust">#e2c869</color>
 </resources>

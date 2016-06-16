@@ -6,7 +6,7 @@ import android.graphics.RectF;
 
 import com.panshen.com.rain.BaseActiveElement;
 
-public class SunNight implements BaseActiveElement {
+ class SunNight implements BaseActiveElement {
     private Paint mPaint;
     private RectF mRectF;
     private RectF mRectFCircle;

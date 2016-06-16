@@ -9,7 +9,7 @@ import com.panshen.com.rain.BaseElement;
 
 import java.util.Random;
 
-public class CloudStar implements BaseElement {
+ class CloudStar implements BaseElement {
     private Paint mPaint;
     private float x, y;
     private Context mContext;
@@ -18,7 +18,7 @@ public class CloudStar implements BaseElement {
     private int Alpha;
     private boolean growthing = true;
 
-    public CloudStar(int xx, int width, int height, Context context, int color) {
+    public CloudStar(int xx, int width, int height, Context context) {
         this.mWidth = width;
         this.mHeight = height;
         this.mContext = context;

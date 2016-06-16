@@ -1,15 +1,15 @@
-package com.panshen.com.rain.dust;
+package com.panshen.com.rain.rain;
 
 import android.graphics.Canvas;
 import android.graphics.Paint;
 
 import com.panshen.com.rain.BaseElement;
 
- class DustWall implements BaseElement {
+ class RainWall implements BaseElement {
     private Paint mPaint;
     private int mWidth, mHeight;
     private int mColor;
-    public DustWall(int width, int height, int color) {
+    public RainWall(int width, int height, int color) {
         mWidth = width;
         mHeight = height;
         mColor = color;

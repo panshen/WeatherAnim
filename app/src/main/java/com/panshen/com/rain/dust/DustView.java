@@ -16,24 +16,12 @@ import com.panshen.com.rain.R;
 public class DustView extends BaseView {
 
     private ArrayList<Dust> list = new ArrayList<>();
-    private int rainNum = 80;
-    private int size;
-    private int rainColor;
-    private boolean randColor;
-    private DustWall rw;
+    private int mDustCount = 150;
+    private DustWall dustWall;
 
     private boolean  perpared;
     public DustView(Context context, AttributeSet attrs) {
         super(context, attrs);
-
-//        TypedArray ta = context.obtainStyledAttributes(attrs,
-//                R.styleable.DustView);
-//
-//        rainNum = ta.getInteger(R.styleable.DustView_rainNum, 200);
-//        size = ta.getInteger(R.styleable.DustView_size, 20);
-//        rainColor = ta.getInteger(R.styleable.DustView_rainColor, 0xffffffff);
-//        randColor = ta.getBoolean(R.styleable.DustView_randColor, false);
-//        ta.recycle();
     }
 
     public DustView(Context context) {
@@ -47,24 +35,27 @@ public class DustView extends BaseView {
 
     @Override
     protected void drawSub(Canvas canvas) {
-        rw.draw(canvas);
-        for (Dust item : list) {
-            item.draw(canvas);
+        dustWall.draw(canvas);
+//        for (Dust item : list) {
+//            item.draw(canvas);
+//        }
+        for (int i = 0; i < list.size(); i++) {
+                list.get(i).draw(canvas);
         }
     }
 
     @Override
     protected void logic() {
-        for (Dust item : list) {
-            item.move();
+        for(int i = 0;i<list.size();i++){
+            list.get(i).move();
         }
     }
 
     @Override
     protected void init() {
-        rw = new DustWall(getWidth(), getHeight(), getResources().getColor(R.color.colorDust));
-        for (int i = 0; i < rainNum; i++) {
-            Dust item = new Dust(getWidth(), getHeight());
+        dustWall = new DustWall(getWidth(), getHeight(), getResources().getColor(R.color.colorDustWall));
+        for (int i = 0; i < mDustCount; i++) {
+            Dust item = new Dust(getWidth(), getHeight(),getResources().getColor(R.color.colorDust));
             list.add(item);
         }
         perpared = true;
@@ -76,10 +67,15 @@ public class DustView extends BaseView {
             Log.i("x", event.values[0] + "");
             Log.i("y", event.values[1] + "");
             Log.i("z", event.values[2] + "");
-            for (Dust item : list) {
-                item.SetX(event.values[0]);
-                item.SetY(event.values[1]);
-                item.ControlZ(event.values[2]);
+//            for (Dust item : list) {
+//                item.SetX(event.values[0]);
+//                item.SetY(event.values[1]);
+//                item.ControlZ(event.values[2]);
+//            }
+            for(int i=0;i<list.size();i++){
+                list.get(i).SetX(event.values[0]);
+                list.get(i).SetY(event.values[1]);
+                list.get(i).ControlZ(event.values[2]);
             }
         }
     }
@@ -87,5 +83,12 @@ public class DustView extends BaseView {
     @Override
     public void onAccuracyChanged(Sensor sensor, int accuracy) {
 
+    }
+    @Override
+    protected void onDetachedFromWindow() {
+        super.onDetachedFromWindow();
+        list.clear();
+        list = null;
+        System.gc();
     }
 }

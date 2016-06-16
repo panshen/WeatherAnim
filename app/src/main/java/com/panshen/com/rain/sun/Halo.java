@@ -13,7 +13,7 @@ import com.panshen.com.rain.mPoint;
 
 import java.util.ArrayList;
 
-public class Halo implements BaseActiveElement {
+ class Halo implements BaseActiveElement {
     private Paint mPaint;
     private int mWidth, mHeight;
     private int mColor;

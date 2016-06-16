@@ -11,7 +11,7 @@ import com.panshen.com.rain.mPoint;
 
 import java.util.ArrayList;
 
-public class Sun implements BaseActiveElement {
+ class Sun implements BaseActiveElement {
     private Paint mPaint;
     private int mWidth, mHeight;
     private int mColor;
@@ -26,7 +26,7 @@ public class Sun implements BaseActiveElement {
         mWidth = width;
         mHeight = height;
         mColor = color;
-       this. xxx = xxx;
+        this.xxx = xxx;
         cX = mWidth / 2;
         cY = 200;
         PolygonWidth = PW;
@@ -63,7 +63,7 @@ public class Sun implements BaseActiveElement {
     }
 
     public void SetX(float i) {
-        cX = (xxx + i)*30;
+        cX = (xxx + i) * 30;
     }
 
     public void draw(Canvas canvas) {
