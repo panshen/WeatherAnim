@@ -5,11 +5,10 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
-import android.util.Log;
 
 import com.panshen.com.rain.BaseActiveElement;
 import com.panshen.com.rain.Polygon;
-import com.panshen.com.rain.mPoint;
+import com.panshen.com.rain.RPoint;
 
 import java.util.ArrayList;
 
@@ -17,7 +16,7 @@ import java.util.ArrayList;
     private Paint mPaint;
     private int mWidth, mHeight;
     private int mColor;
-    private ArrayList<mPoint> points = new ArrayList<>();
+    private ArrayList<RPoint> points = new ArrayList<>();
     private ArrayList<Path> paths = new ArrayList<>();
     private float xx = 1.0f;
     private float cX, cY = -100f;

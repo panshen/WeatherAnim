@@ -64,14 +64,6 @@ public class DustView extends BaseView {
     @Override
     public void onSensorChanged(SensorEvent event) {
         if(perpared) {
-            Log.i("x", event.values[0] + "");
-            Log.i("y", event.values[1] + "");
-            Log.i("z", event.values[2] + "");
-//            for (Dust item : list) {
-//                item.SetX(event.values[0]);
-//                item.SetY(event.values[1]);
-//                item.ControlZ(event.values[2]);
-//            }
             for(int i=0;i<list.size();i++){
                 list.get(i).SetX(event.values[0]);
                 list.get(i).SetY(event.values[1]);
@@ -89,6 +81,5 @@ public class DustView extends BaseView {
         super.onDetachedFromWindow();
         list.clear();
         list = null;
-        System.gc();
     }
 }

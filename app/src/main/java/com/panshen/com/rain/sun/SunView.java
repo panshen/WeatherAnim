@@ -54,7 +54,7 @@ public class SunView extends BaseView {
 
     @Override
     protected void init() {
-        mSunbg = new SunBg(getWidth(), getHeight(), mContext, getResources().getColor(R.color.colorCloudDay));
+        mSunbg = new SunBg(getWidth(), getHeight(), mContext, getResources().getColor(R.color.colorSunBg));
         mHalo = new Halo(20, getWidth(), getHeight(), mContext, getResources().getColor(R.color.colorCloudBackgroundDay));
         for (int i = mColors.length-1; i >= 0; i--) {
             try {
@@ -88,6 +88,5 @@ public class SunView extends BaseView {
         super.onDetachedFromWindow();
         mSunBeams.clear();
         mSunBeams = null;
-        System.gc();
     }
 }

@@ -9,7 +9,7 @@ public class Polygon {
     private int startX;
     private int startY;
     private int r;
-    private ArrayList<mPoint> points = new ArrayList<>();
+    private ArrayList<RPoint> points = new ArrayList<>();
 
     public Polygon(int[] x, int[] y, int r) {
         this.x = x;
@@ -22,7 +22,7 @@ public class Polygon {
     public void posOfPoint(int bianshu) {
         x[0] = startX;
         y[0] = startY;
-        mPoint p;
+        RPoint p;
         for (int i = 0; i < bianshu; i++) {
             p = nextPoint(((2 * Math.PI) / bianshu) * i);
             x[i] = (int) p.getX();
@@ -31,12 +31,12 @@ public class Polygon {
         }
     }
 
-    public ArrayList<mPoint> getPoints() {
+    public ArrayList<RPoint> getPoints() {
         return points;
     }
 
-    public mPoint nextPoint(double arc) {
-        mPoint p = new mPoint();
+    public RPoint nextPoint(double arc) {
+        RPoint p = new RPoint();
         p.setX((int) (x[0] - r * Math.sin(arc)));
         p.setY((int) (y[0] + r - r * Math.cos(arc)));
         return p;

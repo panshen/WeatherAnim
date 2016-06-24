@@ -13,12 +13,11 @@
     <color name="colorCloudSunNight">#faffbf</color>
     <color name="colorCloudBackgroundDay">#4b97d3</color>
     <color name="colorCloudBackgroundNight">#031323</color>
-    <color name="colorCloudDay">#99ffffff</color>
+    <color name="colorCloudDay">#BDFFFFFF</color>
     <color name="colorCloudNight">#cf15304d</color>
     <color name="colorCloudNightt">#9a15304d</color>
     <color name="colorCloudNighttt">#cc2f5a7d</color>
     <color name="colorCloudNightttt">#e615304d</color>
-
 
     <color name="colorOverCast">#c65b6f76</color>
     <color name="colorOverCastt">#d6687980</color>
@@ -26,6 +25,7 @@
     <color name="colorOverCastttt">#93151e25</color>
     <color name="colorOverCastBG">#151e25</color>
 
+    <color name="colorSunBg">#4b97d3</color>
     <color name="colorSun">#d04727</color>
     <color name="colorSunn">#d36331</color>
     <color name="colorSunnn">#d67639</color>

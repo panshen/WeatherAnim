@@ -77,5 +77,6 @@ public abstract class BaseView extends View implements SensorEventListener {
         super.onDetachedFromWindow();
         running = false;
         sm.unregisterListener(this);
+        System.gc();
     }
 }

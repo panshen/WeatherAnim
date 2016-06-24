@@ -1,13 +1,11 @@
 package com.panshen.com.rain.cloud;
 
-import android.animation.ValueAnimator;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 
 import com.panshen.com.rain.BaseActiveElement;
-import com.panshen.com.rain.activity.Utils;
-import com.panshen.com.rain.mPoint;
+import com.panshen.com.rain.RPoint;
 
 import java.util.Random;
 
@@ -19,7 +17,7 @@ import java.util.Random;
     private int xx;
     private Random random;
     private float CenterY;
-    mPoint currentMPoint;
+    RPoint currentRPoint;
     public Cloud(int xx, int width, int height, Context context, int color) {
         this.mWidth = width;
         this.xx = xx;
@@ -37,7 +35,7 @@ import java.util.Random;
         this.x = random.nextInt(mWidth);
         this.y = random.nextInt(100);
         CenterY = random.nextInt(100);
-        currentMPoint = new mPoint(0, mHeight);
+        currentRPoint = new RPoint(0, mHeight);
     }
 
     public void move() {

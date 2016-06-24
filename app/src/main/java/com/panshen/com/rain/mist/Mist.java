@@ -1,5 +1,5 @@
 package com.panshen.com.rain.mist;
-//int result = Min + (int)(Math.random() * ((Max - Min) + 1));
+//Min + (int)(Math.random() * ((Max - Min) + 1));
 
 import android.graphics.Canvas;
 import android.graphics.LinearGradient;
@@ -7,20 +7,19 @@ import android.graphics.Paint;
 import android.graphics.Shader;
 
 import com.panshen.com.rain.BaseActiveElement;
-import com.panshen.com.rain.mPoint;
 
 import java.util.Random;
 
 public class Mist implements BaseActiveElement {
     private Paint mPaint;
-    private float radius , x, y;
+    private float radius, x, y;
     private int mWidth, mHeight;
     private int mColor;
     private int xx;
     private Random random;
     private int toColor = 0;
 
-    public Mist(int y, int xx, int width, int height, int color, int tocolor,int radius) {
+    public Mist(int y, int xx, int width, int height, int color, int tocolor, int radius) {
         this.mWidth = width;
         this.xx = xx;
         this.y = y;
@@ -50,7 +49,7 @@ public class Mist implements BaseActiveElement {
     }
 
     public void SetY(float i) {
-        y = (xx + i) * 20;
+        y = ((xx + i) * 20);
     }
 
     public void ControlY(float i) {

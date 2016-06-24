@@ -77,6 +77,5 @@ public class SunNightView extends BaseView {
         super.onDetachedFromWindow();
         mSunNights.clear();
         mSunNights = null;
-        System.gc();
     }
 }

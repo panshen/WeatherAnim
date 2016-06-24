@@ -7,12 +7,11 @@ import android.content.res.Resources;
 import android.graphics.Canvas;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
-import android.util.AttributeSet;
 
 import com.panshen.com.rain.BaseView;
+import com.panshen.com.rain.RPoint;
 import com.panshen.com.rain.activity.Utils;
 import com.panshen.com.rain.activity.WeatherView;
-import com.panshen.com.rain.mPoint;
 import com.panshen.com.rain.R;
 
 import java.util.ArrayList;
@@ -23,7 +22,7 @@ public class CloudView extends BaseView {
     private CloudBg cloudBg;
     private ArrayList<Cloud> clouds = new ArrayList<>();
     private ArrayList<CloudStar> stars = new ArrayList<>();
-    mPoint currentMPoint;
+    RPoint currentRPoint;
     private int mCouldBackColor = 0;
     private int mCouldSunColor = 0;
     private Csun csun;
@@ -38,7 +37,7 @@ public class CloudView extends BaseView {
     public CloudView(Context context, WeatherView.Situation mmode) {
         super(context);
         this.mContext = context;
-        this.currentMPoint = new mPoint(0, getHeight());
+        this.currentRPoint = new RPoint(0, getHeight());
         this.mMode = mmode;
         this.mRandom = new Random();
         this.mResources = getResources();
@@ -82,11 +81,11 @@ public class CloudView extends BaseView {
         animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
             public void onAnimationUpdate(ValueAnimator animation) {
-                currentMPoint = (mPoint) animation.getAnimatedValue();
+                currentRPoint = (RPoint) animation.getAnimatedValue();
                 if (clouds == null || clouds.size() <= 0) return;
                 for (int i = 0; i < clouds.size(); i++) {
-                    csun.ControlY(currentMPoint.getY());
-                    clouds.get(i).ControlY(currentMPoint.getY());
+                    csun.ControlY(currentRPoint.getY());
+                    clouds.get(i).ControlY(currentRPoint.getY());
                 }
             }
         });

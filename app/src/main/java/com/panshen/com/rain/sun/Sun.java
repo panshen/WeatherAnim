@@ -7,7 +7,7 @@ import android.graphics.Path;
 
 import com.panshen.com.rain.BaseActiveElement;
 import com.panshen.com.rain.Polygon;
-import com.panshen.com.rain.mPoint;
+import com.panshen.com.rain.RPoint;
 
 import java.util.ArrayList;
 
@@ -18,7 +18,7 @@ import java.util.ArrayList;
     private float xx = 1.0f;
     private int xxx;
     private float cX, cY = -100f;
-    private ArrayList<mPoint> points = new ArrayList<>();
+    private ArrayList<RPoint> points = new ArrayList<>();
     private int PolygonWidth;
     Path path;
 

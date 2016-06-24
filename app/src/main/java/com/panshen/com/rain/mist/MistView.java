@@ -11,8 +11,8 @@ import android.util.AttributeSet;
 
 import com.panshen.com.rain.BaseView;
 import com.panshen.com.rain.R;
+import com.panshen.com.rain.RPoint;
 import com.panshen.com.rain.activity.Utils;
-import com.panshen.com.rain.mPoint;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -21,7 +21,7 @@ public class MistView extends BaseView {
     private Context mContext;
     private MistBg MistBg;
     private ArrayList<Mist> mMists = new ArrayList<>();
-    mPoint currentMPoint;
+    RPoint currentRPoint;
     private int mCouldBackColor = 0;
     private Random mRandom;
     private Resources mResources = getResources();
@@ -36,14 +36,14 @@ public class MistView extends BaseView {
     public MistView(Context context) {
         super(context);
         this.mContext = context;
-        this.currentMPoint = new mPoint(0, getHeight());
+        this.currentRPoint = new RPoint(0, getHeight());
         this.mRandom = new Random();
         toColor = mResources.getColor(R.color.colorMistBg);
         mCouldBackColor = mResources.getColor(R.color.colorMistBg);
         mCloudColor = mResources.getColor(R.color.colorMist);
-        radius.add(getWidth() / 3);
-        radius.add(getWidth() / 2);
-        radius.add(getWidth() / 2 + getWidth() / 3);
+        radius.add(100);
+        radius.add(200);
+        radius.add(150);
         StartReverseYAnim();
     }
 
@@ -62,9 +62,9 @@ public class MistView extends BaseView {
         animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
             public void onAnimationUpdate(ValueAnimator animation) {
-                currentMPoint = (mPoint) animation.getAnimatedValue();
+                currentRPoint = (RPoint) animation.getAnimatedValue();
                 for (int i = 0; i < mMists.size(); i++) {
-                    mMists.get(i).ControlY(currentMPoint.getY());
+                    mMists.get(i).ControlY(currentRPoint.getY());
                 }
             }
         });
@@ -88,8 +88,8 @@ public class MistView extends BaseView {
     @Override
     protected void init() {
         MistBg = new MistBg(getWidth(), getHeight(), mContext, mCouldBackColor);
-        for (int i = 0; i < 4; i++) {
-            Mist cloud = new Mist(250 * i, mRandom.nextInt(getWidth()/20), getWidth(), getHeight(), mCloudColor, toColor,radius.get(mRandom.nextInt(radius.size())));
+        for (int i = 0; i < 20; i++) {
+            Mist cloud = new Mist( mRandom.nextInt(getHeight()), mRandom.nextInt(getWidth()/20), getWidth(), getHeight(), mCloudColor, toColor,radius.get(mRandom.nextInt(radius.size())));
             mMists.add(cloud);
         }
     }

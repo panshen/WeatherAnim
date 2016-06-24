@@ -1,17 +1,17 @@
 package com.panshen.com.rain;
 
 
-public class mPoint {
+public class RPoint {
 
     private float x;
 
     private float y;
 
-    public mPoint(float x, float y) {
+    public RPoint(float x, float y) {
         this.x = x;
         this.y = y;
     }
-    public mPoint() {
+    public RPoint() {
     }
 
     public void setX(float x) {
