@@ -1,2 +1,3 @@
 # WeatherAnim
 模仿一加天气的动画效果
+![image](https://github.com/WeatherAnim/screenshots/aa.gif)
