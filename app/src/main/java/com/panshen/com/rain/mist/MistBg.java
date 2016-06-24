@@ -11,14 +11,8 @@ public class MistBg implements BaseActiveElement {
     private Paint mPaint;
     private int mWidth, mHeight;
     private int mColor;
-    private boolean daymode;
     private Context mContext;
 
-    /**
-     * width 屏幕宽度
-     * height 屏幕高度
-     * color  背景主要颜色
-     */
     public MistBg(int width, int height, Context context, int color) {
         mWidth = width;
         mHeight = height;
@@ -29,12 +23,6 @@ public class MistBg implements BaseActiveElement {
     }
 
     public void init() {
-        if (mColor == mContext.getResources().getColor(R.color.colorCloudBackgroundDay))
-            daymode = true;
-        else {
-            daymode = false;
-            mColor = mContext.getResources().getColor(R.color.colorCloudBackgroundNight);
-        }
         mPaint = new Paint();
         mPaint.setColor(mColor);
     }
@@ -45,21 +33,11 @@ public class MistBg implements BaseActiveElement {
     }
 
     public void draw(Canvas canvas) {
-        if (daymode) {
-            drawDay(canvas);
-        } else {
-            drawNight(canvas);
-        }
+        drawDay(canvas);
     }
 
     public void drawDay(Canvas canvas) {
         canvas.drawRect(0, 0, mWidth, mHeight, mPaint);
-    }
-
-    public void drawNight(Canvas canvas) {
-        canvas.drawRect(0, 0, mWidth, mHeight, mPaint);
-
-
     }
 
     @Override

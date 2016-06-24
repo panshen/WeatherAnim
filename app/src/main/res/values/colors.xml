@@ -35,11 +35,8 @@
     <color name="colorSunnnnnnn">#c2c775</color>
     <color name="colorSunnnnnnnn">#a0c9a7</color>
 
-    <color name="colorMist">#f4151e25</color>
-    <color name="colorMistt">#e6151e25</color>
-    <color name="colorMisttt">#d2151e25</color>
-    <color name="colorMistttt">#ce151e25</color>
-    <color name="colorMisttttt">#c1151e25</color>
+    <color name="colorMist">#80939f</color>
+    <color name="colorMistBg">#6A8799</color>
 
     <color name="colorSunNightWall">#09213d</color>
     <color name="colorSunNight1">#a5c9d7</color>

@@ -13,12 +13,6 @@ import com.panshen.com.rain.sunnight.SunNightView;
 
 public class WeatherView {
     private static WeatherView ourInstance = new WeatherView();
-    private CloudView cloudView;
-    private Mist mist;
-    private SunView sunView;
-    private SunNightView sunNightView;
-    private DustView dustView;
-    private mRainView mRainView;
 
     public static WeatherView getInstance() {
         return ourInstance;

@@ -19,14 +19,16 @@ import java.util.Random;
 
 public class MistView extends BaseView {
     private Context mContext;
-    private MistBg cloudBg;
+    private MistBg MistBg;
     private ArrayList<Mist> mMists = new ArrayList<>();
     mPoint currentMPoint;
     private int mCouldBackColor = 0;
-    private int mCouldColor;
     private Random mRandom;
-    private Resources mResources = getResources();;
-    private int[] colors = {mResources.getColor(R.color.colorMist),mResources.getColor(R.color.colorMistt),mResources.getColor(R.color.colorMisttt),mResources.getColor(R.color.colorMistttt),mResources.getColor(R.color.colorMisttttt)};
+    private Resources mResources = getResources();
+    private int mCloudColor;
+    private int toColor = 0;
+    private ArrayList<Integer> radius = new ArrayList();
+
     public MistView(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
@@ -36,10 +38,13 @@ public class MistView extends BaseView {
         this.mContext = context;
         this.currentMPoint = new mPoint(0, getHeight());
         this.mRandom = new Random();
-
+        toColor = mResources.getColor(R.color.colorMistBg);
+        mCouldBackColor = mResources.getColor(R.color.colorMistBg);
+        mCloudColor = mResources.getColor(R.color.colorMist);
+        radius.add(getWidth() / 3);
+        radius.add(getWidth() / 2);
+        radius.add(getWidth() / 2 + getWidth() / 3);
         StartReverseYAnim();
-        mCouldColor = mResources.getColor(R.color.colorDustWall);
-        mCouldBackColor = mResources.getColor(R.color.colorOverCast);
     }
 
     @Override
@@ -68,10 +73,8 @@ public class MistView extends BaseView {
 
     @Override
     protected void drawSub(Canvas canvas) {
-        if (mMists.size() != 0 && cloudBg != null) {
-
-            cloudBg.draw(canvas);
-
+        if (mMists.size() != 0 && MistBg != null) {
+            MistBg.draw(canvas);
             for (int i = 0; i < mMists.size(); i++) {
                 mMists.get(i).draw(canvas);
             }
@@ -80,26 +83,22 @@ public class MistView extends BaseView {
 
     @Override
     protected void logic() {
-        if (mMists.size() != 0 && cloudBg != null) {
-            for (Mist mcl : mMists) {
-                mcl.move();
-            }
-        }
     }
 
     @Override
     protected void init() {
-        cloudBg = new MistBg(getWidth(), getHeight(), mContext, mCouldBackColor);
-        for (int i = 1; i <5; i++) {
-            Mist cloud = new Mist(250*i,mRandom.nextInt(getWidth() / 20), getWidth(), getHeight(), mContext, colors[i-1]);
+        MistBg = new MistBg(getWidth(), getHeight(), mContext, mCouldBackColor);
+        for (int i = 0; i < 4; i++) {
+            Mist cloud = new Mist(250 * i, mRandom.nextInt(getWidth()/20), getWidth(), getHeight(), mCloudColor, toColor,radius.get(mRandom.nextInt(radius.size())));
             mMists.add(cloud);
         }
     }
 
     @Override
     public void onSensorChanged(SensorEvent event) {
-        for (Mist mist : mMists) {
-            mist.SetY(event.values[1]);
+        for (int i = 0; i < mMists.size(); i++) {
+            mMists.get(i).SetY(event.values[1]);
+            mMists.get(i).SetX(event.values[0]);
         }
     }
 
